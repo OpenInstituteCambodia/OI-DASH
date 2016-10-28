@@ -3,7 +3,8 @@
 Homestead.yaml
 Homestead.json
 .env
-
+.env.example
+*.swp
 
 # Created by https://www.gitignore.io/api/laravel,node,composer,bower,windows,macos
 
@@ -20,7 +21,10 @@ bootstrap/cache/
 .env.*.php
 .env.php
 .env
+.env.example
 .idea
+*.swp
+
 
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/
@@ -134,3 +138,4 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+.idea

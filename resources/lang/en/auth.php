@@ -13,7 +13,22 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'form' => [
+        'sign-in-form' => 'Sign In Form',
+        'email' => 'E-Mail Address',
+        'enter-email' => ' Enter E-Mail Address',
+        'password' => 'Password',
+        'enter-password' => 'Enter Password',
+        'remember' => 'Remember me'
+    ],
+
+    'cfs' => 'CFS | Child Friendly School System',
+    'dashboard' => 'Back to Dashboard',
+    'dashboards' => 'Dashboard',
+    'back-user' => 'Back to User list',
+    'report' => 'School Assessment Report',
+    'permission' => 'Permission Denied',
+    'permission-warning' => 'Sorry! You don\'t have right to access this page.',
+    'role' => 'Role - '
 
 ];

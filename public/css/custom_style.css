@@ -1,0 +1,15 @@
+    @font-face {
+        font-family: 'khmer';
+        font-style: normal;
+        font-weight: regular;
+        src: url(../fonts/battambang_regular.ttf);
+    }
+    @font-face {
+        font-family: 'khmer';
+        font-style: normal;
+        font-weight: bold;
+        src: url(../fonts/battambang_bold.ttf);
+    }
+    *, .specific-font{
+        font-family: 'khmer', sans-serif, 'Lato', Calibri, Arial,  serif;
+    }

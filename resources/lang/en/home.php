@@ -37,6 +37,8 @@ return [
 
     'footer' => [
         'powered-by' => 'Powered by Open Institute'
-    ]
+    ],
+
+    'logout-msg' => 'Are you sure you want to log out?'
 
 ];

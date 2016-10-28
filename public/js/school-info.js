@@ -6,9 +6,29 @@ entity.controller("entityInfoController", function ($scope, $http) {
 //            options: [{conjunction :'and',key: {udfType: 1, keyValue: ''}, condition: '>', value: 456}]
 //        }
 //    ];
+    // $scope.user.level.type = {Auth::user()->role->level};
     $scope.selections = [];
     $scope.geography = {};
-    $scope.geography.type = 'country';
+    // $scope.geography.type = 'country';
+
+    $scope.user_type = document.getElementById('auth_level').value;
+
+    switch ($scope.user_type) {
+        case '1':
+        case '2':
+            $scope.geography.type = 'country';
+            break;
+        case '3':
+            $scope.geography.type = 'province';
+            $scope.geography.province = document.getElementById('province_code').value;
+            break;
+        case '4':
+            $scope.geography.type = 'district';
+            $scope.geography.district = document.getElementById('district_code').value;
+            break;
+        default:
+    }
+
     $scope.categories = [];
     $scope.options = [];
     $scope.categories.push();
@@ -25,7 +45,7 @@ entity.controller("entityInfoController", function ($scope, $http) {
         $scope.options.splice(optionIndex, 1);
     };
 
-    // Add values and conditions according to First option dropdown
+    // Add values and conditions according to First option dropdown in Condition Block
     // This will call function in InformationController@showFieldListValue
     $scope.loadValue = function (optionid) {
         $scope.options[optionid].listValues = [];
@@ -42,7 +62,8 @@ entity.controller("entityInfoController", function ($scope, $http) {
             $scope.options[optionid].conditions = response.data.conditions;
         }, function (response) {});
     };
-    
+
+    // Function View result
     $scope.view = function () {
         //make the categories
         var conditions = [];
@@ -70,7 +91,7 @@ entity.controller("entityInfoController", function ($scope, $http) {
                 gp_province: $scope.geography.province,
                 gp_district: $scope.geography.district,
                 gp_commune: $scope.geography.commune,
-                gp_village: $scope.geography.village,
+                // gp_village: $scope.geography.village,
                 table_name: $scope.tableName,
                 data: JSON.stringify(conditions),
                 selections: JSON.stringify(selections)
@@ -100,12 +121,37 @@ entity.controller("entityInfoController", function ($scope, $http) {
     }; 
 });
 
+
 // For Aggregate
 entity.controller("entityAggController", function ($scope, $http) {
     $scope.selections = [];
     $scope.geography = {};
-    $scope.geography.type = 'country';
-    $scope.geography.aggType='country';
+    // $scope.geography.type = 'country';
+
+    $scope.user_type = document.getElementById('auth_level').value;
+
+    switch ($scope.user_type) {
+        case '1':
+        case '2':
+            $scope.geography.type = 'country';
+            $scope.geography.aggType='country';
+            // $scope.geography.province = document.getElementById('province_code').value;
+            break;
+        case '3':
+            $scope.geography.type = 'province';
+            $scope.geography.aggType='province';
+            $scope.geography.province = document.getElementById('province_code').value;
+            break;
+        case '4':
+            $scope.geography.type = 'district';
+            $scope.geography.aggType='district';
+            $scope.geography.province = document.getElementById('province_code').value;
+            $scope.geography.district = document.getElementById('district_code').value;
+            break;
+        default:
+    }
+
+    // $scope.geography.aggType='country';
     $scope.categories = [];
     $scope.options = [];
     $scope.categories.push();
@@ -157,7 +203,8 @@ entity.controller("entityAggController", function ($scope, $http) {
                 gp_province: $scope.geography.province,
                 gp_district: $scope.geography.district,
                 gp_commune: $scope.geography.commune,
-                gp_village: $scope.geography.village,
+                // selected_province_code: document.getElementById('province_code').value,
+                // gp_village: $scope.geography.village,
                 table_name: $scope.tableName,
                 data: JSON.stringify(conditions)
             },

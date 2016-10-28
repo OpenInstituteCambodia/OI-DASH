@@ -9,8 +9,8 @@ use MONITORING\Table;
 
 class HomeController extends Controller
 {
-  public function index(){
-    $tables = Table::all();
-    return response()->view('home',['tables'=>$tables]);
-  }
+    public function index(){
+        $tables = Table::all();
+        return response()->view('home',['tables'=>$tables]);
+    }
 }

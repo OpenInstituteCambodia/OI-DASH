@@ -5,8 +5,13 @@
       <input type="text" ng-init="tableName='<?php echo e($table); ?>'" ng-model="tableName" hidden="">
       <div class="jarviswidget jarviswidget-color-blueLight" id="wid-id-0" data-widget-sortable="false" data-widget-deletebutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
         <header>
+
           <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
           <h2><?php echo e(trans('information_content.form-information-list')); ?></h2>				
+
+          <span class="widget-icon"> <i class="fa fa-list"></i> </span>
+          <label style="margin-left: 10px; margin-top:-1px; font-size: 17px"><?php echo e(trans('information_content.form-information-list')); ?></label>				
+
           <span id="loading" style="display: none;"><i class="fa fa-gear fa-2x fa-spin"></i></span>
         </header>
         <div>
@@ -17,185 +22,194 @@
           <!-- end widget edit box -->
 
           <div class="widget-body no-padding">
-            <div class="smart-form">
-              <fieldset>
-                <header><b><?php echo e(trans('information_content.geography.selecting-geographical-area')); ?></b></header>
-                <div class="col-sm-5">
+
+              <div class="smart-form">
                   <fieldset>
-                    <div class="row">
-                      <section class="col col-4">
-                          <label class="label">
-                              <?php echo e(trans('information_content.geography.geographical-area')); ?>
+                    <header><b><?php echo e(trans('information_content.geography.selecting-geographical-area')); ?></b></header>
+                    <div class="col-sm-5">
+                      <fieldset>
+                        <div class="row">
+                          <section class="col col-4">
+                              <label class="label">
+                                  <?php echo e(trans('information_content.geography.geographical-area')); ?>
 
-                          </label>
-                      </section>
-                      <section class="col col-8">
-                          <label class="select">
-                              <select ng-model="geography.type" class="form-control">
-                                <option value="country"><?php echo e(trans('information_content.geography.country')); ?></option>
-                                <option value="province"><?php echo e(trans('information_content.geography.province')); ?></option>
-                                <option value="district"><?php echo e(trans('information_content.geography.district')); ?></option>
-                                <option value="commune"><?php echo e(trans('information_content.geography.commune')); ?></option>
-                                <option value="village"><?php echo e(trans('information_content.geography.village')); ?></option>
-                              </select>
-                              <i></i>
-                          </label>
-                      </section>
-                    </div>
-                  </fieldset>
-                </div>
-                <div class="col-sm-6" style="border-left: 1px solid black">
-                  <fieldset>
-                    <!-- When Geographical Area dropdown equals 'province', province dropdown will show -->
-                    <div class="row" ng-hide="geography.type === 'country'">
-                        <section class="col col-3">
-                            <label class="label">
-                              <?php echo e(trans('information_content.geography.province')); ?>
-
-                            </label>
-                        </section>
-                        <section class="col col-1">
-                            <label class="label">
-                                :
-                            </label>
-                        </section>
-                        <section class="col col-8">
-                            <label class="select">
-                              <!-- loadNew function here is used to change district according to the selected province -->
-                              <select ng-model="geography.province" id="province-filter" class="form-control" onchange="loadNew(this, 'district')">
-                                  <!-- Only Province is passed from controller. Others will be loaded by Javascript below -->
-                                <option value=""><?php echo e(trans('information_content.geography.province_label')); ?></option>
-                                <?php foreach($provinces as $province): ?>
-                                  <option value="<?php echo e($province->ProvinceCode); ?>"><?php echo e($province->ProvinceName); ?></option>
-                                <?php endforeach; ?>
-                              </select>
-                                <i></i>
-                            </label>
-                        </section>
-                    </div>
-
-                    <!-- If u want to understand this, deleted one the conditions in ng-show below. -->
-                    <div class="row" ng-show="geography.type === 'village' || geography.type === 'commune' || geography.type === 'district'">
-                        <section class="col col-3">
-                            <label class="label">
-                                <?php echo e(trans('information_content.geography.district')); ?>
-
-                            </label>
-                        </section>
-                        <section class="col col-1">
-                            <label class="label">
-                                :
-                            </label>
-                        </section>
-                        <section class="col col-8">
-                            <label class="select">
-                                <select ng-model="geography.district" id="district-filter" class="form-control" onchange="loadNew(this, 'commune')">
-                                    <option value=""><?php echo e(trans('information_content.geography.district_label')); ?></option>
-                                </select>
-                                <i></i>
-                            </label>
-                        </section>
-                    </div>
-                    <div class="row" ng-show="geography.type === 'village' || geography.type === 'commune'">
-                        <section class="col col-3">
-                            <label class="label">
-                                <?php echo e(trans('information_content.geography.commune')); ?>
-
-                            </label>
-                        </section>
-                        <section class="col col-1">
-                            <label class="label">
-                                :
-                            </label>
-                        </section>
-                        <section class="col col-8">
-                            <label class="select">
-                                <select ng-model="geography.commune" id="commune-filter" class="form-control" onchange="loadNew(this, 'village')">
-                                    <option value=""><?php echo e(trans('information_content.geography.commune_label')); ?></option>
-                                </select>
-                                <i></i>
-                            </label>
-                        </section>
-                    </div>
-                    <div class="row" ng-show="geography.type === 'village'">
-                        <section class="col col-3">
-                            <label class="label">
-                                <?php echo e(trans('information_content.geography.village')); ?>
-
-                            </label>
-                        </section>
-                        <section class="col col-1">
-                            <label class="label">
-                                :
-                            </label>
-                        </section>
-                        <section class="col col-8">
-                            <label class="select">
-                                <select ng-model="geography.village" id="village-filter" class="form-control">
-                                    <option value=""><?php echo e(trans('information_content.geography.village_label')); ?></option>
-                                </select>
-                                <i></i>
-                            </label>
-                        </section>
-                    </div>
-                  </fieldset>
-                </div>
-              </fieldset>
-
-              <fieldset>
-                <header><b><?php echo e(trans('information_content.characteristic.selecting-characteristic')); ?></b></header>
-                <div class="col-sm-12">
-                  <fieldset>
-                      <div class="row" ng-repeat="option in options">
-                          <section class="col col-1">
-                              <label class="select">
-                                  <!-- When index is more than one, this select will appear -->
-                                  <select ng-model="option.conjunction" ng-hide="$index === 0" class="form-control">
-                                      <option value="AND"><?php echo e(trans('information_content.characteristic.and')); ?></option>
-                                      <option value="OR"><?php echo e(trans('information_content.characteristic.or')); ?></option>
-                                  </select>
                               </label>
                           </section>
-                          <section class="col col-3">
+                          <section class="col col-8">
+                              <input id="auth_level"  type="hidden" value="<?php echo e(Auth::user()->role->level); ?>" />
+                              <div ng-model="user_type" style="display: none;"></div>
+                              <?php /*<p ng-bind="province_code"></p>*/ ?>
+
                               <label class="select">
-                                  <select ng-model="option.key.keyValue"  ng-change="loadValue($index)"  class="form-control">
-                                      <option value=""><?php echo e(trans('information_content.characteristic.select')); ?></option>
-                                      <?php foreach($fields as $field): ?>
-                                          <?php if($field->DisplayField!==1): ?>
-                                              <option ng-show="<?php echo e($field->EDFSearchType); ?> !== 0" value="<?php echo e($field->EntityDefinedFieldNameInTable); ?>"><?php echo e($field->EntityDefinedFieldListName); ?></option>
-                                          <?php endif; ?>
+                                  <select ng-model="geography.type" class="form-control" id="geography">
+                                      <?php /*<option value="" style="display: none; visibility: hidden">Hello</option>*/ ?>
+                                      <?php foreach($geographical_areas as $geographical_area): ?>
+                                          <option value="<?php echo e($geographical_area['name']); ?>" selected="<?php echo e($geographical_area['selected']); ?>"><?php echo e($geographical_area['label']); ?></option>
                                       <?php endforeach; ?>
                                   </select>
+                                  <i></i>
                               </label>
                           </section>
+                            <?php /*<p ng-bind="geography.province"></p>*/ ?>
+                        </div>
+                      </fieldset>
+                    </div>
+                    <div class="col-sm-6" style="border-left: 1px solid black">
+<?php /*                        <?php if(Auth::user()->role->level == 1 || Auth::user()->role->level == 2): ?>*/ ?>
+                            <fieldset>
+                                <!-- When Geographical Area dropdown equals 'province', province dropdown will show -->
+                                <div class="row" ng-hide="geography.type === 'country'">
+                                    <section class="col col-3">
+                                        <label class="label">
+                                          <?php echo e(trans('information_content.geography.province')); ?>
 
-                          <section class="col col-3">
-                              <label class="select">
-                                  <select ng-model="option.condition" class="form-control">
-                                      <option value=""><?php echo e(trans('information_content.characteristic.select')); ?></option>
-                                      <option ng-repeat="condition in option.conditions" value="<%condition.ConditionSymbol%>"><%condition.ConditionName%></option>
-                                  </select>
-                              </label>
-                          </section>
+                                        </label>
+                                    </section>
+                                    <section class="col col-1">
+                                        <label class="label">
+                                            :
+                                        </label>
+                                    </section>
+                                    <section class="col col-8">
+                                        <?php if($provinces->count() < 2): ?>
+                                            <input id="province_code"  type="hidden" value="<?php echo e($provinces->first()->ProvinceCode); ?>" />
+                                            <h5><?php echo e($provinces->first()->ProvinceName); ?></h5>
+                                        <?php else: ?>
+                                            <label class="select">
+                                                <!-- loadNew function here is used to change district according to the selected province -->
+                                                <select ng-model="geography.province" id="province-filter" class="form-control" onchange="loadNew(this, 'district')">
+                                                    <!-- Only Province is passed from controller. Others will be loaded by Javascript below -->
+                                                    <option value=""><?php echo e(trans('information_content.geography.province_label')); ?></option>
+                                                        <?php foreach($provinces as $province): ?>
+                                                            <option value="<?php echo e($province->ProvinceCode); ?>"><?php echo e($province->ProvinceName); ?></option>
+                                                        <?php endforeach; ?>
+                                                </select>
+                                                <i></i>
+                                            </label>
+                                        <?php endif; ?>
+                                    </section>
+                                    <?php /*<p ng-bind="geography.province"></p>*/ ?>
+                                </div>
 
-                          <!-- This will display a dropdown or textbox -->
-                          <section class="col col-3">
-                              <!-- option.key.edfSearchType === 1 displays dropdown -->
-                              <label class="select" ng-show="option.key.edfSearchType === 1">
-                                  <?php if(session()->get('locale')): ?>
-                                      <?php if(session()->get('locale') == 'en'): ?>
-                                          <select ng-model="option.value" class="form-control">
-                                            <option value=""><?php echo e(trans('information_content.characteristic.select')); ?></option>
-                                             <option ng-repeat="listValue in option.listValues" value="<%listValue.Value%>"><%listValue.Description%></option>
-                                          </select>
-                                          <i></i>
-                                      <?php elseif(session()->get('locale') == 'km'): ?>
+                                <!-- If u want to understand this, deleted one the conditions in ng-show below. -->
+                                <div class="row" ng-show="geography.type === 'commune' || geography.type === 'district'">
+                                <?php /*<div class="row" ng-show="geography.type === 'district'">*/ ?>
+                                    <section class="col col-3">
+                                        <label class="label">
+                                            <?php echo e(trans('information_content.geography.district')); ?>
+
+                                        </label>
+                                    </section>
+                                    <section class="col col-1">
+                                        <label class="label">
+                                            :
+                                        </label>
+                                    </section>
+                                    <section class="col col-8">
+                                        <?php if($districts->count() < 2): ?>
+                                            <input id="district_code"  type="hidden" value="<?php echo e($districts->first()->DistrictCode); ?>" />
+                                            <h5><?php echo e($districts->first()->DistrictName); ?></h5>
+                                        <?php else: ?>
+                                            <label class="select">
+                                                <select ng-model="geography.district" id="district-filter" class="form-control" onchange="loadNew(this, 'commune')">
+                                                    <option value=""><?php echo e(trans('information_content.geography.district_label')); ?></option>
+                                                    </select>
+                                                <i></i>
+                                            </label>
+                                        <?php endif; ?>
+                                    </section>
+                                </div>
+
+                                <div class="row" ng-show="geography.type === 'commune'">
+                                    <section class="col col-3">
+                                        <label class="label">
+                                            <?php echo e(trans('information_content.geography.commune')); ?>
+
+                                        </label>
+                                    </section>
+                                    <section class="col col-1">
+                                        <label class="label">
+                                            :
+                                        </label>
+                                    </section>
+                                    <section class="col col-8">
+                                        <label class="select">
+                                            <select ng-model="geography.commune" id="commune-filter" class="form-control" onchange="loadNew(this, 'village')">
+                                                <option value=""><?php echo e(trans('information_content.geography.commune_label')); ?></option>
+                                            </select>
+                                            <i></i>
+                                        </label>
+                                    </section>
+                                </div>
+                            </fieldset>
+                        <?php /*<?php endif; ?>*/ ?>
+                    </div>
+                  </fieldset>
+
+                  <?php /*Condition Block*/ ?>
+                  <fieldset>
+                    <header><b><?php echo e(trans('information_content.characteristic.selecting-characteristic')); ?></b></header>
+                    <div class="col-sm-12">
+                      <fieldset>
+                          <div class="row" ng-repeat="option in options">
+                              <section class="col col-1">
+                                  <label class="select">
+                                      <!-- When index is more than one, this select will appear -->
+                                      <select ng-model="option.conjunction" ng-hide="$index === 0" class="form-control">
+                                          <option value="AND"><?php echo e(trans('information_content.characteristic.and')); ?></option>
+                                          <option value="OR"><?php echo e(trans('information_content.characteristic.or')); ?></option>
+                                      </select>
+                                  </label>
+                              </section>
+                              <section class="col col-3">
+                                  <label class="select">
+                                      <select ng-model="option.key.keyValue"  ng-change="loadValue($index)"  class="form-control">
+                                          <option value=""><?php echo e(trans('information_content.characteristic.select')); ?></option>
+                                          <?php foreach($fields as $field): ?>
+                                              <?php if($field->DisplayField!==1): ?>
+                                                  <option ng-show="<?php echo e($field->EDFSearchType); ?> !== 0" value="<?php echo e($field->EntityDefinedFieldNameInTable); ?>"><?php echo e($field->EntityDefinedFieldListName); ?></option>
+                                              <?php endif; ?>
+                                          <?php endforeach; ?>
+                                      </select>
+                                  </label>
+                              </section>
+
+                              <section class="col col-3">
+                                  <label class="select">
+                                      <select ng-model="option.condition" class="form-control">
+                                          <option value=""><?php echo e(trans('information_content.characteristic.select')); ?></option>
+                                          <option ng-repeat="condition in option.conditions" value="<%condition.ConditionSymbol%>"><%condition.ConditionName%></option>
+                                      </select>
+                                  </label>
+                              </section>
+
+                              <!-- This will display a dropdown or textbox -->
+                              <section class="col col-3">
+                                  <!-- option.key.edfSearchType === 1 displays dropdown -->
+                                  <label class="select" ng-show="option.key.edfSearchType === 1">
+                                      <?php if(session()->get('locale')): ?>
+                                          <?php if(session()->get('locale') == 'en'): ?>
+                                              <select ng-model="option.value" class="form-control">
+                                                <option value=""><?php echo e(trans('information_content.characteristic.select')); ?></option>
+                                                 <option ng-repeat="listValue in option.listValues" value="<%listValue.Value%>"><%listValue.Description%></option>
+                                              </select>
+                                              <i></i>
+                                          <?php elseif(session()->get('locale') == 'km'): ?>
+                                              <select ng-model="option.value" class="form-control">
+                                                  <option value=""><?php echo e(trans('information_content.characteristic.select')); ?></option>
+                                                  <option ng-repeat="listValue in option.listValues" value="<%listValue.Value%>"><%listValue.Description_KH%></option>
+                                              </select>
+                                              <i></i>
+                                          <?php endif; ?>
+                                      <?php else: ?>
+
                                           <select ng-model="option.value" class="form-control">
                                               <option value=""><?php echo e(trans('information_content.characteristic.select')); ?></option>
                                               <option ng-repeat="listValue in option.listValues" value="<%listValue.Value%>"><%listValue.Description_KH%></option>
                                           </select>
                                           <i></i>
                                       <?php endif; ?>
+
                                   <?php else: ?>
                                       <select ng-model="option.value" class="form-control">
                                           <option value=""><?php echo e(trans('information_content.characteristic.select')); ?></option>
@@ -251,6 +265,56 @@
                 <button class="btn btn-danger" type="button" ng-click="reset()"><i class="fa fa-fw fa-refresh"></i><?php echo e(trans('button.reset')); ?></button>
               </footer>
             </div>
+
+                                  </label>
+                                  <label class="input" ng-show="option.key.edfSearchType === 2">
+                                      <input ng-model="option.value" class="form-control">
+                                  </label>
+                              </section>
+
+                              <section class="col col-1">
+                                  <button class="btn btn-sm btn-danger" ng-click="removeOption($index)"><i class="fa fa-trash-o"></i><?php echo e(trans('button.remove')); ?></button>
+                              </section>
+                          </div>
+                      </fieldset>
+                    </div>
+                    <button class="btn btn-sm btn-primary" ng-click="addOption('AND')"><?php echo e(trans('button.new-option')); ?></button>
+                  </fieldset>
+
+                  <?php /*Tree Blcok*/ ?>
+                  <fieldset>
+                    <header>
+                        <b><?php echo e(trans('information_content.selecting-field')); ?></b>
+                    </header>
+                    <?php $i=0; ?>
+                    <div class="row">
+                      <div class="tree">
+                        <ul>
+                            <?php foreach($categories as $category): ?>
+                              <li class="parent_li" role="treeitem" ng-init="addCategory();">
+                                  <label><input type="checkbox" ng-init="categories[<?php echo e($i); ?>].selectedField=false" ng-model="categories[<?php echo e($i); ?>].selectedField"></label><span title="Collapse this branch"><?php echo e($category->EntityDefinedCategoryName); ?></span>
+                                  <ul>
+                                      <?php foreach($category->fields as $field): ?>
+                                          <?php if($field->DisplayField): ?>
+                                            <li>
+                                              <span title="Collapse this branch"><input class="selections" type="checkbox" ng-checked="categories[<?php echo e($i); ?>].selectedField || <?php echo e($field->DefaultSelected); ?> === 1" value="<?php echo e($field->EntityDefinedFieldNameInTable); ?>">&nbsp;<?php echo e($field->EntityDefinedFieldListName); ?></span>
+                                            </li>
+                                          <?php endif; ?>
+                                      <?php endforeach; ?>
+                                  </ul>
+                              </li>
+                              <?php $i++; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <footer>
+                    <button class="btn btn-primary" ng-click="view()"><i class="fa fa-fw fa-search"></i><?php echo e(trans('button.search')); ?></button>
+                    <button class="btn btn-danger" type="button" ng-click="reset()"><i class="fa fa-fw fa-refresh"></i><?php echo e(trans('button.reset')); ?></button>
+                  </footer>
+              </div>
           </div>
         </div>
       </div><!-- end panel-->
@@ -275,6 +339,47 @@
     pageSetUp();
     $(document).ready(function () {
         angular.bootstrap($('#widget-grid'), ["app"]);
+
+//            $('select[ng-model = "geography.province"]').find('option')[0].remove();
+        $('#geography').change(function () {
+            if((<?php echo e($user_role_level); ?>) == 3) {
+                var p_code = $('#province_code').val();
+
+                var type = 'district';
+
+                jQuery.ajax({
+                    url: "<?php echo e(url('PDCV')); ?>/" + type + "/" + p_code,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+//                            alert(data);
+                        $("#district-filter").html("<option value=''><?php echo e(trans('information_content.geography.district_label')); ?></option>");
+                        $.each(data, function (i, value) {
+//                                alert(value.DistrictCode);
+                            $('#district-filter').append('<option value="' + value.DistrictCode + '">' + value.DistrictName + '</option>');
+                        });
+                    }
+                });
+            } else if((<?php echo e($user_role_level); ?>) > 3) {
+                var d_code = $('#district_code').val();
+
+                var type = 'commune';
+
+                jQuery.ajax({
+                    url: "<?php echo e(url('PDCV')); ?>/" + type + "/" + d_code,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+//                            alert(data);
+                        $("#commune-filter").html("<option value=''><?php echo e(trans('information_content.geography.commune_label')); ?></option>");
+                        $.each(data, function (i, value) {
+//                                alert(value.DistrictCode);
+                            $('#commune-filter').append('<option value="' + value.CommuneCode + '">' + value.CommuneName + '</option>');
+                        });
+                    }
+                });
+            }
+        });
     });
     loadScript("js/plugin/bootstraptree/bootstrap-tree.min.js", function(){});
 </script>
@@ -321,7 +426,6 @@
             name = "";
         }
 
-        // Go to PDCVController 
         $.ajax({
             url: "<?php echo e(url('PDCV')); ?>/" + type + "/" + code,
             type: "GET",

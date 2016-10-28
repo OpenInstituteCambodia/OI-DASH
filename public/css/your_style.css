@@ -17,3 +17,7 @@
  * - BODY
  * - CUSTOM STYLES
  */
+
+    .help-block {
+        margin-top: -10px;
+    }

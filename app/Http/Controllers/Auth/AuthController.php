@@ -2,11 +2,13 @@
 
 namespace MONITORING\Http\Controllers\Auth;
 
+use MONITORING\Http\Requests\Request;
 use MONITORING\User;
 use Validator;
 use MONITORING\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -28,7 +30,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new authentication controller instance.
@@ -68,5 +70,15 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function loginWithCondition(\Illuminate\Http\Request $request) {
+        if($request->isMethod('post')) {
+            if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'is_deleted' => 0])) {
+                return redirect()->intended('/');
+            } else {
+                return redirect()->back()->withErrors(trans('validation.not-access'))->withInput();
+            }
+        }
     }
 }

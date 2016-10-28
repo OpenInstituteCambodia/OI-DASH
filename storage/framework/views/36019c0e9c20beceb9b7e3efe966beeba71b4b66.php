@@ -20,9 +20,7 @@
         <!-- WIDGET END -->
 
     </div>
-
     <!-- end row -->
-
 </section>
 <!-- end widget grid -->
 

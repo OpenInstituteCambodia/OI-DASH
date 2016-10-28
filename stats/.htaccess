@@ -1,0 +1,7 @@
+AuthName "cfs.open.org.kh statistics"
+AuthType Basic
+AuthUserFile /home/virtualmin/cfs.open.org.kh/.stats-htpasswd
+require valid-user
+<Files .stats-htpasswd>
+deny from all
+</Files>

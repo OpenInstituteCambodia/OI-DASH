@@ -49,7 +49,7 @@
                         </thead>
                         <tbody>
                             @foreach($rows as $row)
-                                <tr onclick="compareObject(this)" data-href="#monitor/entity/{{$table->id}}/{{$row->EDF_CODE}}" target="_blank">
+                                <tr onclick="compareObject(this)" data-href="home#monitor/entity/{{$table->id}}/{{$row->EDF_CODE}}" target="_blank">
                                     <?php $i = 0; ?>
                                     @foreach($row as $data)
                                         @if($i===0)

@@ -26,7 +26,6 @@ entity.controller("entityInfoController", function ($scope, $http) {
             $scope.geography.type = 'district';
             $scope.geography.district = document.getElementById('district_code').value;
             break;
-        default:
     }
 
     $scope.categories = [];
@@ -102,6 +101,7 @@ entity.controller("entityInfoController", function ($scope, $http) {
             }
         }).then(function (response) {
             document.getElementById("form-result").innerHTML = response.data;
+            document.getElementById("form-result").style.display = 'block';
             $('#modal-loading').modal('hide');
             reloadScript();
         }, function () {
@@ -113,16 +113,35 @@ entity.controller("entityInfoController", function ($scope, $http) {
     $scope.reset = function () {
         $scope.selections = [];
         $scope.geography = {};
-        $scope.geography.type = 'country';
+        $scope.options = [];
+        $scope.user_type = document.getElementById('auth_level').value;
+        switch ($scope.user_type) {
+            case '1':
+            case '2':
+                $scope.geography.type = 'country';
+                break;
+            case '3':
+                $scope.geography.type = 'province';
+                $scope.geography.province = document.getElementById('province_code').value;
+                break;
+            case '4':
+                $scope.geography.type = 'district';
+                $scope.geography.district = document.getElementById('district_code').value;
+                break;
+        }
+
+        document.getElementById("form-result").style.display = 'none';
+
         for (i = 0; i < $scope.categories.length; i++) {
             $scope.categories[i].options = [];
-            $scope.categories[i].selectedField = true;
+            $scope.categories[i].selectedField = false;
         }
     }; 
 });
 
 
-// For Aggregate
+
+// ============= For Aggregate =================
 entity.controller("entityAggController", function ($scope, $http) {
     $scope.selections = [];
     $scope.geography = {};
@@ -212,8 +231,9 @@ entity.controller("entityAggController", function ($scope, $http) {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then(function (response) {
-            document.getElementById("form-result").innerHTML = response.data;
             $('#modal-loading').modal('hide');
+            document.getElementById("form-result").innerHTML = response.data;
+            document.getElementById("form-result").style.display = 'block';
             reloadScript();
         }, function () {
             $('#modal-loading').modal('hide');
@@ -224,12 +244,30 @@ entity.controller("entityAggController", function ($scope, $http) {
     $scope.reset = function () {
         $scope.selections = [];
         $scope.geography = {};
-        $scope.geography.type = 'country';
-        gp_aggType: $scope.geography.aggType = 'country';
-        for (i = 0; i < $scope.categories.length; i++) {
-            $scope.categories[i].options = [];
-            $scope.categories[i].selectedField = true;
+        $scope.options = [];
+
+        $scope.user_type = document.getElementById('auth_level').value;
+        switch ($scope.user_type) {
+            case '1':
+            case '2':
+                $scope.geography.type = 'country';
+                $scope.geography.aggType='country';
+                break;
+            case '3':
+                $scope.geography.type = 'province';
+                $scope.geography.aggType = 'province';
+                $scope.geography.province = document.getElementById('province_code').value;
+                break;
+            case '4':
+                $scope.geography.type = 'district';
+                $scope.geography.aggType = 'district';
+                $scope.geography.province = document.getElementById('province_code').value;
+                $scope.geography.district = document.getElementById('district_code').value;
+                break;
         }
+
+        document.getElementById("form-result").style.display = 'none';
+
     };
 });
 

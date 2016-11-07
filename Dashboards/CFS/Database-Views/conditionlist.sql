@@ -1,0 +1,2 @@
+DROP VIEW IF EXISTS `conditionlist`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `conditionlist` AS select `ceng`.`ConditionCode` AS `ConditionCode`,`ceng`.`ConditionName` AS `ConditionNameEN`,`ckh`.`ConditionName` AS `ConditionNameKH`,`ceng`.`ConditionSymbol` AS `ConditionSymbol` from (`condition` `ceng` left join `condition` `ckh` on((`ceng`.`ConditionCode` = `ckh`.`ConditionCode`))) where ((`ceng`.`LanguageID` = 1) and (`ckh`.`LanguageID` = 2)) ;

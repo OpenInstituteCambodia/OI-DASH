@@ -5,8 +5,8 @@ return [
     'field' => [
         'name' => 'ឈ្មោះ',
         'email' => 'អីុមែ៉ល',
-        'password' => 'លេខសំងាត់',
-        'confirmed-password' => 'ផ្ទៀងផ្ទាត់លេខសំងាត់',
+        'password' => 'លេខសម្ងាត់',
+        'confirmed-password' => 'ផ្ទៀងផ្ទាត់លេខសម្ងាត់',
         'role' => 'តួនាទី',
         'level' => 'កំរិត',
         'province' => 'ខេត្ត',

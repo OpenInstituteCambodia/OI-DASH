@@ -2,6 +2,6 @@
 
 @section('content')
     <!-- #MAIN CONTENT -->
-    <div id="content"></div>
+    {{--<div id="content"></div>--}}
     <!-- END #MAIN CONTENT -->
 @stop

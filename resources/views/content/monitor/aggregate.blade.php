@@ -45,6 +45,7 @@
                                                     <i></i>
                                                 </label>
                                             </section>
+                                            {{--<p ng-bind="geography.province"></p>--}}
                                         </div>
                                     </fieldset>
                                 </div>
@@ -242,7 +243,6 @@
                 <img src="{{asset('img/loading.gif')}}">
             </div>
         </div>
-
     </div>
 </div>
 

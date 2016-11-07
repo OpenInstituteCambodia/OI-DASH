@@ -26,6 +26,7 @@ entity.controller("entityInfoController", function ($scope, $http) {
             $scope.geography.type = 'district';
             $scope.geography.district = document.getElementById('district_code').value;
             break;
+        default: break;
     }
 
     $scope.categories = [];
@@ -128,6 +129,7 @@ entity.controller("entityInfoController", function ($scope, $http) {
                 $scope.geography.type = 'district';
                 $scope.geography.district = document.getElementById('district_code').value;
                 break;
+            default: break;
         }
 
         document.getElementById("form-result").style.display = 'none';
@@ -158,16 +160,16 @@ entity.controller("entityAggController", function ($scope, $http) {
             break;
         case '3':
             $scope.geography.type = 'province';
-            $scope.geography.aggType='province';
+            $scope.geography.aggType = 'province';
             $scope.geography.province = document.getElementById('province_code').value;
             break;
         case '4':
             $scope.geography.type = 'district';
-            $scope.geography.aggType='district';
+            $scope.geography.aggType = 'district';
             $scope.geography.province = document.getElementById('province_code').value;
             $scope.geography.district = document.getElementById('district_code').value;
             break;
-        default:
+        default: break;
     }
 
     // $scope.geography.aggType='country';
@@ -204,7 +206,7 @@ entity.controller("entityAggController", function ($scope, $http) {
     };
 
     $scope.view = function () {
-        //make the categori
+        //make the category
         var conditions = [];
         for (i = 0; i < $scope.options.length; i++) {
             conditions.push({conjunction: $scope.options[i].conjunction,
@@ -251,7 +253,7 @@ entity.controller("entityAggController", function ($scope, $http) {
             case '1':
             case '2':
                 $scope.geography.type = 'country';
-                $scope.geography.aggType='country';
+                $scope.geography.aggType = 'country';
                 break;
             case '3':
                 $scope.geography.type = 'province';
@@ -264,6 +266,7 @@ entity.controller("entityAggController", function ($scope, $http) {
                 $scope.geography.province = document.getElementById('province_code').value;
                 $scope.geography.district = document.getElementById('district_code').value;
                 break;
+            default: break;
         }
 
         document.getElementById("form-result").style.display = 'none';

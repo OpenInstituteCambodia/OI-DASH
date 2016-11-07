@@ -3,7 +3,7 @@
 <head>
     <base href="/">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title> CFS | Open Institute</title>
+    <title><?php echo e(trans('auth.cfs')); ?></title>
     <meta name="description" content="Child Friendly School">
     <meta name="phinath" content="OI Software Developer">
 
@@ -107,9 +107,24 @@ Use search to find needed section.
 
 <!-- #HEADER -->
 <header id="header">
+    <div id="logo-group" style="width: 80px;">
+        <!-- PLACE YOUR LOGO HERE -->
+        <span id="logo"><a href="http://www.moeys.gov.kh" target="blank"><img src="img/ministry_logo.png" alt="Ministry of Education" style="position: absolute; top: 0; width: 40px; height: 55px;"></a></span>
+        <!-- END LOGO PLACEHOLDER -->
+    </div>
+    <div id="logo-group" style="width: 340px;">
+        <!-- PLACE YOUR LOGO HERE -->
+        <span id="logo" style="position: absolute; top: 0; width: 290px; font-size: 18px;"><?php echo e(trans('auth.cfs')); ?></span>
+        <!-- END LOGO PLACEHOLDER -->
+    </div>
+    <div id="logo-group" style="width: 150px;">
+        <!-- PLACE YOUR LOGO HERE -->
+        <span id="logo"><a href="http://www.unicef.org/cambodia/" target="blank"><img src="img/unicef_logo.png" alt="UNICEF" style="position: absolute; top: 0; padding-top: 8px; width: 95px;;"></a></span>
+        <!-- END LOGO PLACEHOLDER -->
+    </div>
     <div id="logo-group">
         <!-- PLACE YOUR LOGO HERE -->
-        <span id="logo"><a href="http://open.org.kh/" target="blank"><img src="img/oi-logo.gif" alt="Monitoring" style="position: absolute; top: 0;"></a></span>
+        <span id="logo"><a href="http://open.org.kh/" target="blank"><img src="img/oi-logo.gif" alt="Open Institute" style="position: absolute; top: 0; width: 90px; padding-top: 5px"></a></span>
         <!-- END LOGO PLACEHOLDER -->
     </div>
 
@@ -234,7 +249,7 @@ Use search to find needed section.
 <!-- #NAVIGATION -->
 <!-- Left panel : Navigation area -->
 <!-- Note: This width of the aside area can be adjusted through LESS/SASS variables -->
-<aside id="left-panel" style="min-width: 240px;">
+<aside id="left-panel">
 
     <!-- User info -->
     <div class="login-info">
@@ -248,9 +263,7 @@ Use search to find needed section.
 
                     <?php endif; ?>
                 </span>
-                <i class="fa fa-angle-down">
-
-                </i>
+                <i class="fa fa-angle-down"></i>
             </a>
 
         </span>
@@ -339,7 +352,7 @@ Use search to find needed section.
 <div id="main" role="main">
 
     <!-- RIBBON -->
-    <div id="ribbon" style="margin-left: 20px">
+    <div id="ribbon">
         <span class="ribbon-button-alignment">
             <i class="fa fa-home" style="color: white"></i>
         </span>
@@ -369,7 +382,7 @@ Use search to find needed section.
         <?php /*<?php echo $__env->yieldContent('content'); ?>*/ ?>
     <?php /*<?php endif; ?>*/ ?>
 
-    <div id="content" style="margin-left: 20px"></div>
+    <div id="content"></div>
 
 </div>
 <!-- END #MAIN PANEL -->

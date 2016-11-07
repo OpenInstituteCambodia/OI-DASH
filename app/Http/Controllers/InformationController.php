@@ -67,9 +67,15 @@ class InformationController extends Controller {
             default: break;
         }
 
+//        dd($conditions);
+
         if (count($conditions) > 0) {
             $conditions[0]->conjunction = "AND";
         }
+
+//        $conditions[i]->keyValue = "RESULT_SECTION_CAL_COM1_SHOW_RESULT";
+//        $conditions[i]->condition = ">=";
+//        $conditions[i]->value = "yes" or "2";
 
         for ($i = 0; $i < count($conditions); $i++) {
             // keyValue is from dropdown1
@@ -82,6 +88,8 @@ class InformationController extends Controller {
                 }
             }
         }
+
+//        dd($selections);
 
         // Selecting column header according to selections from checkboxes and displaying them in result form
         $col_header = DB::table('entitydefinedfieldwithlistfull')

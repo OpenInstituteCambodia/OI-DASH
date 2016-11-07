@@ -49,7 +49,7 @@
                         </thead>
                         <tbody>
                             <?php foreach($rows as $row): ?>
-                                <tr onclick="compareObject(this)" data-href="#monitor/entity/<?php echo e($table->id); ?>/<?php echo e($row->EDF_CODE); ?>" target="_blank">
+                                <tr onclick="compareObject(this)" data-href="home#monitor/entity/<?php echo e($table->id); ?>/<?php echo e($row->EDF_CODE); ?>" target="_blank">
                                     <?php $i = 0; ?>
                                     <?php foreach($row as $data): ?>
                                         <?php if($i===0): ?>

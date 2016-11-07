@@ -31,5 +31,5 @@ return [
         'information-result' => ' លទ្ធផលនៃព័ត៌មាន'
     ],
 
-    'variance' => 'គំលាតខុសគ្នា'
+    'variance' => 'គំលាត'
 ];

@@ -40,6 +40,8 @@
                               <div ng-model="user_type" style="display: none;"></div>
                               <?php /*<p ng-bind="province_code"></p>*/ ?>
 
+                              <?php /*<p ng-bind="geography.type"></p>*/ ?>
+
                               <label class="select">
                                   <select ng-model="geography.type" class="form-control" id="geography">
                                       <?php /*<option value="" style="display: none; visibility: hidden">Hello</option>*/ ?>
@@ -80,9 +82,9 @@
                                                 <select ng-model="geography.province" id="province-filter" class="form-control" onchange="loadNew(this, 'district')">
                                                     <!-- Only Province is passed from controller. Others will be loaded by Javascript below -->
                                                     <option value=""><?php echo e(trans('information_content.geography.province_label')); ?></option>
-                                                        <?php foreach($provinces as $province): ?>
-                                                            <option value="<?php echo e($province->ProvinceCode); ?>"><?php echo e($province->ProvinceName); ?></option>
-                                                        <?php endforeach; ?>
+                                                    <?php foreach($provinces as $province): ?>
+                                                        <option value="<?php echo e($province->ProvinceCode); ?>"><?php echo e($province->ProvinceName); ?></option>
+                                                    <?php endforeach; ?>
                                                 </select>
                                                 <i></i>
                                             </label>
@@ -113,7 +115,7 @@
                                             <label class="select">
                                                 <select ng-model="geography.district" id="district-filter" class="form-control" onchange="loadNew(this, 'commune')">
                                                     <option value=""><?php echo e(trans('information_content.geography.district_label')); ?></option>
-                                                    </select>
+                                                </select>
                                                 <i></i>
                                             </label>
                                         <?php endif; ?>
@@ -163,11 +165,14 @@
                               </section>
                               <section class="col col-3">
                                   <label class="select">
-                                      <select ng-model="option.key.keyValue"  ng-change="loadValue($index)"  class="form-control">
+                                      <select ng-model="option.key.keyValue" ng-change="loadValue($index)"  class="form-control">
                                           <option value=""><?php echo e(trans('information_content.characteristic.select')); ?></option>
                                           <?php foreach($fields as $field): ?>
                                               <?php if($field->DisplayField!==1): ?>
-                                                  <option ng-show="<?php echo e($field->EDFSearchType); ?> !== 0" value="<?php echo e($field->EntityDefinedFieldNameInTable); ?>"><?php echo e($field->EntityDefinedFieldListName); ?></option>
+                                                  <option ng-show="<?php echo e($field->EDFSearchType); ?> !== 0" value="<?php echo e($field->EntityDefinedFieldNameInTable); ?>">
+                                                      <?php echo e($field->EntityDefinedFieldListName); ?>
+
+                                                  </option>
                                               <?php endif; ?>
                                           <?php endforeach; ?>
                                       </select>
@@ -340,7 +345,10 @@
     $(document).ready(function () {
         angular.bootstrap($('#widget-grid'), ["app"]);
 
-//            $('select[ng-model = "geography.province"]').find('option')[0].remove();
+//        if($('select[ng-model = "geography.type"]').find('option')[0] != 'country') {
+//            $('select[ng-model = "geography.type"]').find('option')[0].remove();
+//        }
+
         $('#geography').change(function () {
             if((<?php echo e($user_role_level); ?>) == 3) {
                 var p_code = $('#province_code').val();
@@ -479,13 +487,13 @@
                     "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
             "oTableTools": {
                 "aButtons": [
-                    "copy",
-                    "xls",
-                    "pdf",
-                    {
-                        "sExtends": "print",
-                        "sMessage": "Generated by Open Institute Monitoring System <i>(press Esc to close)</i>"
-                    }
+//                    "copy",
+//                    "xls",
+//                    "pdf",
+//                    {
+//                        "sExtends": "print",
+//                        "sMessage": "Generated by Open Institute Monitoring System <i>(press Esc to close)</i>"
+//                    }
                 ],
                 "sSwfPath": "<?php echo e(asset('js/plugin/datatables/swf/copy_csv_xls_pdf.swf')); ?>"
             },

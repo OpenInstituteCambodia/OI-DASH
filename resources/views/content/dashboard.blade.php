@@ -5,7 +5,7 @@
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
 				<div class="panel panel-default" style="border: none">
-					<div class="panel-heading heading" style="padding-top: 20px">{{ trans('auth.dashboards') }} - {{ trans('auth.cfs') }}</div>
+					<div class="panel-heading heading" style="padding-top: 20px">{{ trans('auth.cfs') }}</div>
 				</div>
 			</div>
 		</div>

@@ -13,3 +13,38 @@
     *, .specific-font{
         font-family: 'khmer', sans-serif, 'Lato', Calibri, Arial,  serif;
     }
+
+    aside#left-panel {
+        width: 235px;
+    }
+
+    .ribbon-button-alignment {
+        padding-left: 12px !important;
+    }
+
+    #content {
+        margin-left: 10px;
+    }
+
+    .no-padding {
+        padding: 0;
+    }
+
+    .school-compare {
+        width: 472px;
+        margin-bottom: 45px;
+        padding-left: 0;
+        padding-right: 5px;
+    }
+
+    .variance {
+        margin-bottom: 45px;
+        padding-left: 0;
+        padding-right: 0;
+        width: 60px;
+    }
+
+    /*logo side*/
+    #header>:first-child, aside {
+        width: 50px;
+    }

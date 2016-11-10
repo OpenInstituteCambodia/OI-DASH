@@ -1,12 +1,12 @@
 <section ng-app="app" id="widget-grid" class="">
     <div class="row">
         <article class="col-sm-12 col-md-12 col-lg-12" ng-controller="entityInfoController">
-            <input type="text" ng-init="tableName='{{$table}}'" ng-model="tableName" hidden="">
+            <input type="text" ng-init="tableName='<?php echo e($table); ?>'" ng-model="tableName" hidden="">
             <div class="jarviswidget jarviswidget-color-blueLight" id="wid-id-0" data-widget-sortable="false"
                  data-widget-deletebutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
                 <header>
                     <span class="widget-icon"> <i class="fa fa-list"></i> </span>
-                    <label style="margin-left: 10px; margin-top:-1px; font-size: 17px">{{ trans('information_content.form-information-list') }}</label>
+                    <label style="margin-left: 10px; margin-top:-1px; font-size: 17px"><?php echo e(trans('information_content.form-information-list')); ?></label>
                     <span id="loading" style="display: none;"><i class="fa fa-gear fa-2x fa-spin"></i></span>
                 </header>
                 <div>
@@ -20,45 +20,47 @@
                         <div class="smart-form">
                             <fieldset>
                                 <header>
-                                    <b>{{ trans('information_content.geography.selecting-geographical-area') }}</b>
+                                    <b><?php echo e(trans('information_content.geography.selecting-geographical-area')); ?></b>
                                 </header>
                                 <div class="col-sm-5">
                                     <fieldset>
                                         <div class="row">
                                             <section class="col col-4">
                                                 <label class="label">
-                                                    {{ trans('information_content.geography.geographical-area') }}
+                                                    <?php echo e(trans('information_content.geography.geographical-area')); ?>
+
                                                 </label>
                                             </section>
                                             <section class="col col-8">
-                                                <input id="auth_level" type="hidden" value="{{ Auth::user()->role->level }}"/>
+                                                <input id="auth_level" type="hidden" value="<?php echo e(Auth::user()->role->level); ?>"/>
                                                 <div ng-model="user_type" style="display: none;"></div>
-                                                {{--<p ng-bind="province_code"></p>--}}
+                                                <?php /*<p ng-bind="province_code"></p>*/ ?>
 
-                                                {{--<p ng-bind="geography.type"></p>--}}
+                                                <?php /*<p ng-bind="geography.type"></p>*/ ?>
 
                                                 <label class="select">
                                                     <select ng-model="geography.type" class="form-control" id="geography">
-                                                        {{--<option value="" style="display: none; visibility: hidden">Hello</option>--}}
-                                                        @foreach($geographical_areas as $geographical_area)
-                                                            <option value="{{$geographical_area['name']}}" selected="{{$geographical_area['selected']}}">{{$geographical_area['label']}}</option>
-                                                        @endforeach
+                                                        <?php /*<option value="" style="display: none; visibility: hidden">Hello</option>*/ ?>
+                                                        <?php foreach($geographical_areas as $geographical_area): ?>
+                                                            <option value="<?php echo e($geographical_area['name']); ?>" selected="<?php echo e($geographical_area['selected']); ?>"><?php echo e($geographical_area['label']); ?></option>
+                                                        <?php endforeach; ?>
                                                     </select>
                                                     <i></i>
                                                 </label>
                                             </section>
-                                            {{--<p ng-bind="geography.province"></p>--}}
+                                            <?php /*<p ng-bind="geography.province"></p>*/ ?>
                                         </div>
                                     </fieldset>
                                 </div>
                                 <div class="col-sm-6" style="border-left: 1px solid black">
-                                    {{--                        @if(Auth::user()->role->level == 1 || Auth::user()->role->level == 2)--}}
+                                    <?php /*                        <?php if(Auth::user()->role->level == 1 || Auth::user()->role->level == 2): ?>*/ ?>
                                     <fieldset>
                                         <!-- When Geographical Area dropdown equals 'province', province dropdown will show -->
                                         <div class="row" ng-hide="geography.type === 'country'">
                                             <section class="col col-3">
                                                 <label class="label">
-                                                    {{ trans('information_content.geography.province') }}
+                                                    <?php echo e(trans('information_content.geography.province')); ?>
+
                                                 </label>
                                             </section>
                                             <section class="col col-1">
@@ -67,33 +69,34 @@
                                                 </label>
                                             </section>
                                             <section class="col col-8">
-                                                @if($provinces->count() < 2)
-                                                    <input id="province_code" type="hidden" value="{{ $provinces->first()->ProvinceCode }}"/>
-                                                    <h5>{{ $provinces->first()->ProvinceName }}</h5>
-                                                @else
+                                                <?php if($provinces->count() < 2): ?>
+                                                    <input id="province_code" type="hidden" value="<?php echo e($provinces->first()->ProvinceCode); ?>"/>
+                                                    <h5><?php echo e($provinces->first()->ProvinceName); ?></h5>
+                                                <?php else: ?>
                                                     <label class="select">
                                                         <!-- loadNew function here is used to change district according to the selected province -->
                                                         <select ng-model="geography.province" id="province-filter" class="form-control" onchange="loadNew(this, 'district')">
                                                             <!-- Only Province is passed from controller. Others will be loaded by Javascript below -->
-                                                            <option value="">{{ trans('information_content.geography.province_label') }}</option>
-                                                            @foreach($provinces as $province)
-                                                                <option value="{{$province->ProvinceCode}}">{{$province->ProvinceName}}</option>
-                                                            @endforeach
+                                                            <option value=""><?php echo e(trans('information_content.geography.province_label')); ?></option>
+                                                            <?php foreach($provinces as $province): ?>
+                                                                <option value="<?php echo e($province->ProvinceCode); ?>"><?php echo e($province->ProvinceName); ?></option>
+                                                            <?php endforeach; ?>
                                                         </select>
                                                         <i></i>
                                                     </label>
-                                                @endif
+                                                <?php endif; ?>
                                             </section>
-                                            {{--<p ng-bind="geography.province"></p>--}}
+                                            <?php /*<p ng-bind="geography.province"></p>*/ ?>
                                         </div>
 
                                         <!-- If u want to understand this, deleted one the conditions in ng-show below. -->
                                         <div class="row"
                                              ng-show="geography.type === 'commune' || geography.type === 'district'">
-                                            {{--<div class="row" ng-show="geography.type === 'district'">--}}
+                                            <?php /*<div class="row" ng-show="geography.type === 'district'">*/ ?>
                                             <section class="col col-3">
                                                 <label class="label">
-                                                    {{ trans('information_content.geography.district') }}
+                                                    <?php echo e(trans('information_content.geography.district')); ?>
+
                                                 </label>
                                             </section>
                                             <section class="col col-1">
@@ -102,24 +105,25 @@
                                                 </label>
                                             </section>
                                             <section class="col col-8">
-                                                @if($districts->count() < 2)
-                                                    <input id="district_code" type="hidden" value="{{ $districts->first()->DistrictCode }}"/>
-                                                    <h5>{{ $districts->first()->DistrictName }}</h5>
-                                                @else
+                                                <?php if($districts->count() < 2): ?>
+                                                    <input id="district_code" type="hidden" value="<?php echo e($districts->first()->DistrictCode); ?>"/>
+                                                    <h5><?php echo e($districts->first()->DistrictName); ?></h5>
+                                                <?php else: ?>
                                                     <label class="select">
                                                         <select ng-model="geography.district" id="district-filter" class="form-control" onchange="loadNew(this, 'commune')">
-                                                            <option value="">{{ trans('information_content.geography.district_label') }}</option>
+                                                            <option value=""><?php echo e(trans('information_content.geography.district_label')); ?></option>
                                                         </select>
                                                         <i></i>
                                                     </label>
-                                                @endif
+                                                <?php endif; ?>
                                             </section>
                                         </div>
 
                                         <div class="row" ng-show="geography.type === 'commune'">
                                             <section class="col col-3">
                                                 <label class="label">
-                                                    {{ trans('information_content.geography.commune') }}
+                                                    <?php echo e(trans('information_content.geography.commune')); ?>
+
                                                 </label>
                                             </section>
                                             <section class="col col-1">
@@ -130,21 +134,21 @@
                                             <section class="col col-8">
                                                 <label class="select">
                                                     <select ng-model="geography.commune" id="commune-filter" class="form-control" onchange="loadNew(this, 'village')">
-                                                        <option value="">{{ trans('information_content.geography.commune_label') }}</option>
+                                                        <option value=""><?php echo e(trans('information_content.geography.commune_label')); ?></option>
                                                     </select>
                                                     <i></i>
                                                 </label>
                                             </section>
                                         </div>
                                     </fieldset>
-                                    {{--@endif--}}
+                                    <?php /*<?php endif; ?>*/ ?>
                                 </div>
                             </fieldset>
 
-                            {{--Condition Block--}}
+                            <?php /*Condition Block*/ ?>
                             <fieldset>
                                 <header>
-                                    <b>{{ trans('information_content.characteristic.selecting-characteristic') }}</b>
+                                    <b><?php echo e(trans('information_content.characteristic.selecting-characteristic')); ?></b>
                                 </header>
                                 <div class="col-sm-12">
                                     <fieldset>
@@ -153,22 +157,23 @@
                                                 <label class="select">
                                                     <!-- When index is more than one, this select will appear -->
                                                     <select ng-model="option.conjunction" ng-hide="$index === 0" class="form-control">
-                                                        <option value="AND">{{ trans('information_content.characteristic.and') }}</option>
-                                                        <option value="OR">{{ trans('information_content.characteristic.or') }}</option>
+                                                        <option value="AND"><?php echo e(trans('information_content.characteristic.and')); ?></option>
+                                                        <option value="OR"><?php echo e(trans('information_content.characteristic.or')); ?></option>
                                                     </select>
                                                 </label>
                                             </section>
                                             <section class="col col-3">
                                                 <label class="select">
                                                     <select ng-model="option.key.keyValue" ng-change="loadValue($index)" class="form-control">
-                                                        <option value="">{{ trans('information_content.characteristic.select') }}</option>
-                                                        @foreach($fields as $field)
-                                                            @if($field->DisplayField!==1)
-                                                                <option ng-show="{{$field->EDFSearchType}} !== 0" value="{{$field->EntityDefinedFieldNameInTable}}">
-                                                                    {{$field->EntityDefinedFieldListName}}
+                                                        <option value=""><?php echo e(trans('information_content.characteristic.select')); ?></option>
+                                                        <?php foreach($fields as $field): ?>
+                                                            <?php if($field->DisplayField!==1): ?>
+                                                                <option ng-show="<?php echo e($field->EDFSearchType); ?> !== 0" value="<?php echo e($field->EntityDefinedFieldNameInTable); ?>">
+                                                                    <?php echo e($field->EntityDefinedFieldListName); ?>
+
                                                                 </option>
-                                                            @endif
-                                                        @endforeach
+                                                            <?php endif; ?>
+                                                        <?php endforeach; ?>
                                                     </select>
                                                 </label>
                                             </section>
@@ -176,7 +181,7 @@
                                             <section class="col col-3">
                                                 <label class="select">
                                                     <select ng-model="option.condition" class="form-control">
-                                                        <option value="">{{ trans('information_content.characteristic.select') }}</option>
+                                                        <option value=""><?php echo e(trans('information_content.characteristic.select')); ?></option>
                                                         <option ng-repeat="condition in option.conditions" value="<%condition.ConditionSymbol%>">
                                                             <%condition.ConditionName%>
                                                         </option>
@@ -188,33 +193,33 @@
                                             <section class="col col-3">
                                                 <!-- option.key.edfSearchType === 1 displays dropdown -->
                                                 <label class="select" ng-show="option.key.edfSearchType === 1">
-                                                    @if (session()->get('locale'))
-                                                        @if (session()->get('locale') == 'en')
+                                                    <?php if(session()->get('locale')): ?>
+                                                        <?php if(session()->get('locale') == 'en'): ?>
                                                             <select ng-model="option.value" class="form-control">
-                                                                <option value="">{{ trans('information_content.characteristic.select') }}</option>
+                                                                <option value=""><?php echo e(trans('information_content.characteristic.select')); ?></option>
                                                                 <option ng-repeat="listValue in option.listValues" value="<%listValue.Value%>">
                                                                     <%listValue.Description%>
                                                                 </option>
                                                             </select>
                                                             <i></i>
-                                                        @elseif (session()->get('locale') == 'km')
+                                                        <?php elseif(session()->get('locale') == 'km'): ?>
                                                             <select ng-model="option.value" class="form-control">
-                                                                <option value="">{{ trans('information_content.characteristic.select') }}</option>
+                                                                <option value=""><?php echo e(trans('information_content.characteristic.select')); ?></option>
                                                                 <option ng-repeat="listValue in option.listValues" value="<%listValue.Value%>">
                                                                     <%listValue.Description_KH%>
                                                                 </option>
                                                             </select>
                                                             <i></i>
-                                                        @endif
-                                                    @else
+                                                        <?php endif; ?>
+                                                    <?php else: ?>
                                                         <select ng-model="option.value" class="form-control">
-                                                            <option value="">{{ trans('information_content.characteristic.select') }}</option>
+                                                            <option value=""><?php echo e(trans('information_content.characteristic.select')); ?></option>
                                                             <option ng-repeat="listValue in option.listValues" value="<%listValue.Value%>">
                                                                 <%listValue.Description_KH%>
                                                             </option>
                                                         </select>
                                                         <i></i>
-                                                    @endif
+                                                    <?php endif; ?>
                                                 </label>
                                                 <label class="input" ng-show="option.key.edfSearchType === 2">
                                                     <input ng-model="option.value" class="form-control">
@@ -223,48 +228,49 @@
 
                                             <section class="col col-1">
                                                 <button class="btn btn-sm btn-danger" ng-click="removeOption($index)">
-                                                    <i class="fa fa-trash-o"></i>{{ trans('button.remove') }}
+                                                    <i class="fa fa-trash-o"></i><?php echo e(trans('button.remove')); ?>
+
                                                 </button>
                                             </section>
                                         </div>
                                     </fieldset>
                                 </div>
-                                <button class="btn btn-sm btn-primary" ng-click="addOption('AND')">{{ trans('button.new-option') }}</button>
+                                <button class="btn btn-sm btn-primary" ng-click="addOption('AND')"><?php echo e(trans('button.new-option')); ?></button>
                             </fieldset>
 
-                            {{--Tree Blcok--}}
+                            <?php /*Tree Blcok*/ ?>
                             <fieldset>
                                 <header>
-                                    <b>{{ trans('information_content.selecting-field') }}</b>
+                                    <b><?php echo e(trans('information_content.selecting-field')); ?></b>
                                 </header>
                                 <?php $i = 0; ?>
                                 <div class="row">
                                     <div class="tree">
                                         <ul>
-                                            @foreach ($categories as $category)
+                                            <?php foreach($categories as $category): ?>
                                                 <li class="parent_li" role="treeitem" ng-init="addCategory();">
-                                                    <label><input type="checkbox" ng-init="categories[{{$i}}].selectedField=false" ng-model="categories[{{$i}}].selectedField"></label>
-                                                    <span title="Collapse this branch">{{$category->EntityDefinedCategoryName}}</span>
+                                                    <label><input type="checkbox" ng-init="categories[<?php echo e($i); ?>].selectedField=false" ng-model="categories[<?php echo e($i); ?>].selectedField"></label>
+                                                    <span title="Collapse this branch"><?php echo e($category->EntityDefinedCategoryName); ?></span>
                                                     <ul>
-                                                        @foreach($category->fields as $field)
-                                                            @if($field->DisplayField)
+                                                        <?php foreach($category->fields as $field): ?>
+                                                            <?php if($field->DisplayField): ?>
                                                                 <li>
-                                                                    <span title="Collapse this branch"><input class="selections" type="checkbox" ng-checked="categories[{{ $i }}].selectedField || {{ $field->DefaultSelected }} === 1" value="{{$field->EntityDefinedFieldNameInTable}}">&nbsp;{{$field->EntityDefinedFieldListName}}</span>
+                                                                    <span title="Collapse this branch"><input class="selections" type="checkbox" ng-checked="categories[<?php echo e($i); ?>].selectedField || <?php echo e($field->DefaultSelected); ?> === 1" value="<?php echo e($field->EntityDefinedFieldNameInTable); ?>">&nbsp;<?php echo e($field->EntityDefinedFieldListName); ?></span>
                                                                 </li>
-                                                            @endif
-                                                        @endforeach
+                                                            <?php endif; ?>
+                                                        <?php endforeach; ?>
                                                     </ul>
                                                 </li>
                                                 <?php $i++; ?>
-                                            @endforeach
+                                            <?php endforeach; ?>
                                         </ul>
                                     </div>
                                 </div>
                             </fieldset>
 
                             <footer>
-                                <button class="btn btn-primary" ng-click="view()"><i class="fa fa-fw fa-search"></i>{{ trans('button.search') }}</button>
-                                <button class="btn btn-danger" type="button" ng-click="reset()"><i class="fa fa-fw fa-refresh"></i>{{ trans('button.reset') }}</button>
+                                <button class="btn btn-primary" ng-click="view()"><i class="fa fa-fw fa-search"></i><?php echo e(trans('button.search')); ?></button>
+                                <button class="btn btn-danger" type="button" ng-click="reset()"><i class="fa fa-fw fa-refresh"></i><?php echo e(trans('button.reset')); ?></button>
                             </footer>
                         </div>
                     </div>
@@ -281,7 +287,7 @@
     <div class="modal-dialog">
         <div class="modal-content" style="background-color: transparent; box-shadow: none; border: none;">
             <div class="modal-body" style="background-color: transparent; text-align: center;">
-                <img src="{{asset('img/loading.gif')}}">
+                <img src="<?php echo e(asset('img/loading.gif')); ?>">
             </div>
         </div>
     </div>
@@ -297,36 +303,36 @@
 //        }
 
         $('#geography').change(function () {
-            if (({{ $user_role_level }}) == 3) {
+            if ((<?php echo e($user_role_level); ?>) == 3) {
                 var p_code = $('#province_code').val();
 
                 var type = 'district';
 
                 jQuery.ajax({
-                    url: "{{url('PDCV')}}/" + type + "/" + p_code,
+                    url: "<?php echo e(url('PDCV')); ?>/" + type + "/" + p_code,
                     type: "GET",
                     dataType: "json",
                     success: function (data) {
 //                            alert(data);
-                        $("#district-filter").html("<option value=''>{{ trans('information_content.geography.district_label') }}</option>");
+                        $("#district-filter").html("<option value=''><?php echo e(trans('information_content.geography.district_label')); ?></option>");
                         $.each(data, function (i, value) {
 //                                alert(value.DistrictCode);
                             $('#district-filter').append('<option value="' + value.DistrictCode + '">' + value.DistrictName + '</option>');
                         });
                     }
                 });
-            } else if (({{ $user_role_level }}) > 3) {
+            } else if ((<?php echo e($user_role_level); ?>) > 3) {
                 var d_code = $('#district_code').val();
 
                 var type = 'commune';
 
                 jQuery.ajax({
-                    url: "{{url('PDCV')}}/" + type + "/" + d_code,
+                    url: "<?php echo e(url('PDCV')); ?>/" + type + "/" + d_code,
                     type: "GET",
                     dataType: "json",
                     success: function (data) {
 //                            alert(data);
-                        $("#commune-filter").html("<option value=''>{{ trans('information_content.geography.commune_label') }}</option>");
+                        $("#commune-filter").html("<option value=''><?php echo e(trans('information_content.geography.commune_label')); ?></option>");
                         $.each(data, function (i, value) {
 //                                alert(value.DistrictCode);
                             $('#commune-filter').append('<option value="' + value.CommuneCode + '">' + value.CommuneName + '</option>');
@@ -347,20 +353,20 @@
         var location = getLocation(type, code);
 
         if (type === 'district') {
-            $("#district-filter").html("<option value=''>{{ trans('information_content.geography.district_label') }}</option>");
+            $("#district-filter").html("<option value=''><?php echo e(trans('information_content.geography.district_label')); ?></option>");
             for (i = 0; i < location.length; i++) {
                 $("#district-filter").append("<option value='" + location[i].DistrictCode + "'>" + location[i].DistrictName + "</option>");
             }
-            $("#commune-filter").html("<option value=''>{{ trans('information_content.geography.commune_label') }}</option>");
-            $("#village-filter").html("<option value=''>{{ trans('information_content.geography.village_label') }}</option>");
+            $("#commune-filter").html("<option value=''><?php echo e(trans('information_content.geography.commune_label')); ?></option>");
+            $("#village-filter").html("<option value=''><?php echo e(trans('information_content.geography.village_label')); ?></option>");
         } else if (type === 'commune') {
-            $("#commune-filter").html("<option value=''>{{ trans('information_content.geography.commune_label') }}</option>");
+            $("#commune-filter").html("<option value=''><?php echo e(trans('information_content.geography.commune_label')); ?></option>");
             for (i = 0; i < location.length; i++) {
                 $("#commune-filter").append("<option value='" + location[i].CommuneCode + "'>" + location[i].CommuneName + "</option>");
             }
-            $("#village-filter").html("<option value=''>{{ trans('information_content.geography.village_label') }}</option>");
+            $("#village-filter").html("<option value=''><?php echo e(trans('information_content.geography.village_label')); ?></option>");
         } else if (type === 'village') {
-            $("#village-filter").html("<option value=''>{{ trans('information_content.geography.village_label') }}</option>");
+            $("#village-filter").html("<option value=''><?php echo e(trans('information_content.geography.village_label')); ?></option>");
             for (i = 0; i < location.length; i++) {
                 $("#village-filter").append("<option value='" + location[i].VillageCode + "'>" + location[i].VillageName + "</option>");
             }
@@ -375,7 +381,7 @@
 
         // Go to PDCVController
         $.ajax({
-            url: "{{url('PDCV')}}/" + type + "/" + code,
+            url: "<?php echo e(url('PDCV')); ?>/" + type + "/" + code,
             type: "GET",
             async: false,
             success: function (result) {
@@ -435,7 +441,7 @@
 //                        "sMessage": "Generated by Open Institute Monitoring System <i>(press Esc to close)</i>"
 //                    }
                 ],
-                "sSwfPath": "{{asset('js/plugin/datatables/swf/copy_csv_xls_pdf.swf')}}"
+                "sSwfPath": "<?php echo e(asset('js/plugin/datatables/swf/copy_csv_xls_pdf.swf')); ?>"
             },
             "iDisplayLength": 20,
             "autoWidth": true,
@@ -496,11 +502,11 @@
     };
 
     var reloadScript = function () {
-        loadScript("{{asset('js/plugin/datatables/jquery.dataTables.min.js')}}", function () {
-            loadScript("{{asset('js/plugin/datatables/dataTables.colVis.min.js')}}", function () {
-                loadScript("{{asset('js/plugin/datatables/dataTables.tableTools.min.js')}}", function () {
-                    loadScript("{{asset('js/plugin/datatables/dataTables.bootstrap.min.js')}}", function () {
-                        loadScript("{{asset('js/plugin/datatable-responsive/datatables.responsive.min.js')}}", pagefunction);
+        loadScript("<?php echo e(asset('js/plugin/datatables/jquery.dataTables.min.js')); ?>", function () {
+            loadScript("<?php echo e(asset('js/plugin/datatables/dataTables.colVis.min.js')); ?>", function () {
+                loadScript("<?php echo e(asset('js/plugin/datatables/dataTables.tableTools.min.js')); ?>", function () {
+                    loadScript("<?php echo e(asset('js/plugin/datatables/dataTables.bootstrap.min.js')); ?>", function () {
+                        loadScript("<?php echo e(asset('js/plugin/datatable-responsive/datatables.responsive.min.js')); ?>", pagefunction);
                     });
                 });
             });

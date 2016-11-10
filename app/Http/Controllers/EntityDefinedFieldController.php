@@ -118,8 +118,11 @@ class EntityDefinedFieldController extends Controller {
         $file = $request->file('file');
         $inputFileName = $file->getClientOriginalName();
         $file_tmp_name = $file->getFileInfo();
+        // Tables here refers to the name sheet in the Excel file
         $tables = Excel::selectSheets('Tables')->load($file_tmp_name);
+        // Categories here refers to the name sheet in the Excel file
         $categories = Excel::selectSheets('Categories')->load($file_tmp_name);
+        // Variables here refers to the name sheet in the Excel file
         $variables = Excel::selectSheets('Variables')->load($file_tmp_name);
 
         $variable_options = Excel::selectSheets('VariableOptions')->load($file_tmp_name);
@@ -253,7 +256,8 @@ class EntityDefinedFieldController extends Controller {
 
     public function exportProcess(Request $request) {
         $this->table = $request->input('table-name');
-        Excel::load(resource_path() . '\assets\excel-template\variable-list.xlsx', function($reader) {
+//        variable-list.xlsx is at empty excel file
+        Excel::load(resource_path() . '/assets/excel-template/variable-list.xlsx', function($reader) {
             $reader->sheet('Tables', function($sheet) {
                 $table = DB::table('table')->where('id', $this->table)->first();
 

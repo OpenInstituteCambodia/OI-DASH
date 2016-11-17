@@ -112,7 +112,7 @@ Use search to find needed section.
 <header id="header">
     <div id="logo-group" style="width: 80px;">
         <!-- PLACE YOUR LOGO HERE -->
-        <span id="logo"><a href="http://www.moeys.gov.kh" target="blank"><img src="img/ministry_logo.png" alt="Ministry of Education" style="position: absolute; top: 0; width: 40px; height: 55px;"></a></span>
+        <span id="logo"><a href="http://www.moeys.gov.kh" target="blank"><img src="img/ministry_logo.png" alt="Ministry of Education" style="position: absolute; top: -2px; width: 40px; height: 55px;"></a></span>
         <!-- END LOGO PLACEHOLDER -->
     </div>
     <div id="logo-group" style="width: 340px;">

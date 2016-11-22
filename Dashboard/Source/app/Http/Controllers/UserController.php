@@ -36,7 +36,7 @@ class UserController extends Controller {
         }
     }
 
-    public function rules(Request $request) {
+    public function rules(Request $request, $id=null) {
 //        $user = User::find($this->users);
 
         $method = $request->method();
@@ -64,7 +64,7 @@ class UserController extends Controller {
             {
                 return [
                     'name' => 'required',
-                    'email' => 'required|email|max:255',
+                    'email' => 'required|email|max:255|unique:users,email,'.$id,
                     'role_id' => 'required',
                     'level_id' => 'required'
                 ];
@@ -201,7 +201,7 @@ class UserController extends Controller {
 
 //        dd($request->all());
 
-        $validator = Validator::make($request->all(), $this->rules($request));
+        $validator = Validator::make($request->all(), $this->rules($request, $id));
 
         if ($validator->fails()) {
             return \Redirect::to('users/'.$user->id.'/edit')->withErrors($validator)->withInput();

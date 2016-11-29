@@ -94,7 +94,7 @@ public class WidgetFactory {
                         } else if (appearance.equals("address")) {
                             questionWidget = new AddressWidget(context, fep);
                         } else {
-                            String text = fep.getLongText();
+                            //String text = fep.getLongText();
                             questionWidget = new StringWidget(context, fep, readOnlyOverride);
                         }
                         break;

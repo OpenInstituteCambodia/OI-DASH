@@ -27,6 +27,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,6 +40,7 @@ import com.google.android.gms.analytics.Logger;
 
 import org.javarosa.core.model.data.IAnswerData;
 import org.javarosa.form.api.FormEntryPrompt;
+import org.joda.time.DateTime;
 import org.odk.collect.android.cfc.R;
 import org.odk.collect.android.cfc.application.Collect;
 import org.odk.collect.android.cfc.utilities.PropertiesUtils;
@@ -435,8 +437,6 @@ public abstract class QuestionWidget extends LinearLayout {
 
 
 
-
-
         if (fieldName.equalsIgnoreCase("c1_abuse")) {
             PropertiesUtils.setQuestion2321a1(mQuestionText);
         }
@@ -550,6 +550,12 @@ public abstract class QuestionWidget extends LinearLayout {
             if (view instanceof RadioButton) {
                 ((RadioButton)view).setChecked(false);
             }
+            if(view instanceof DatePicker){
+                //set today
+                DatePicker datePicker = (DatePicker) view;
+                DateTime ldt = new DateTime();
+                datePicker.updateDate(ldt.getYear(), ldt.getMonthOfYear() - 1, ldt.getDayOfMonth());
+            }
 
             Log.d("class-name", view.getClass().toString());
 
@@ -569,6 +575,17 @@ public abstract class QuestionWidget extends LinearLayout {
             if(view instanceof ViewGroup && (((ViewGroup)view).getChildCount() > 0))
                 clearForm((ViewGroup)view);
         }
+    }
+
+    public void clearDatePickerForm(ViewGroup group)
+    {
+
+            if(group instanceof DatePicker){
+                //set today
+                DatePicker datePicker = (DatePicker) group;
+                DateTime ldt = new DateTime();
+                datePicker.updateDate(ldt.getYear(), ldt.getMonthOfYear() - 1, ldt.getDayOfMonth());
+            }
     }
 
 }

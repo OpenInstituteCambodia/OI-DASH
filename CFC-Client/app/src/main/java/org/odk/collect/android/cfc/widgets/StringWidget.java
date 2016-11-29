@@ -83,133 +83,287 @@ public class StringWidget extends QuestionWidget {
         }
         // CFC form address
         else if(fieldName.equalsIgnoreCase("address1_province_code")) {
-            Log.i("province_code", PropertiesUtils.getAddress1ProvinceCode());
+            //Log.i("province_code", PropertiesUtils.getAddress1ProvinceCode());
+            if (PropertiesUtils.getAddress1ProvinceCode()==null){
+                PropertiesUtils.setAddress1ProvinceCode("");
+            }
             mAnswer.setText(PropertiesUtils.getAddress1ProvinceCode());
         } else if(fieldName.equalsIgnoreCase("address1_district_code")) {
+
+            if (PropertiesUtils.getAddress1DistrictCode()==null){
+                PropertiesUtils.setAddress1DistrictCode("");
+            }
             mAnswer.setText(PropertiesUtils.getAddress1DistrictCode());
         } else if(fieldName.equalsIgnoreCase("address1_commune_code")) {
+            if (PropertiesUtils.getAddress1CommuneCode()==null){
+                PropertiesUtils.setAddress1CommuneCode("");
+            }
             mAnswer.setText(PropertiesUtils.getAddress1CommuneCode());
+
         } else if(fieldName.equalsIgnoreCase("address1_village_code")) {
+            if (PropertiesUtils.getAddress1VillageCode()==null){
+                PropertiesUtils.setAddress1VillageCode("");
+            }
             mAnswer.setText(PropertiesUtils.getAddress1VillageCode());
         }
 
         else if(fieldName.equalsIgnoreCase("address2_province_code")) {
-            Log.i("province_code", PropertiesUtils.getAddress2ProvinceCode());
+            //Log.i("province_code", PropertiesUtils.getAddress2ProvinceCode());
+            if (PropertiesUtils.getAddress2ProvinceCode()==null){
+                PropertiesUtils.setAddress2ProvinceCode("");
+            }
             mAnswer.setText(PropertiesUtils.getAddress2ProvinceCode());
         } else if(fieldName.equalsIgnoreCase("address2_district_code")) {
+
+            if (PropertiesUtils.getAddress2DistrictCode()==null){
+                PropertiesUtils.setAddress2DistrictCode("");
+            }
             mAnswer.setText(PropertiesUtils.getAddress2DistrictCode());
         } else if(fieldName.equalsIgnoreCase("address2_commune_code")) {
+            if (PropertiesUtils.getAddress2CommuneCode()==null){
+                PropertiesUtils.setAddress2CommuneCode("");
+            }
             mAnswer.setText(PropertiesUtils.getAddress2CommuneCode());
         } else if(fieldName.equalsIgnoreCase("address2_village_code")) {
+            if (PropertiesUtils.getAddress2VillageCode()==null){
+                PropertiesUtils.setAddress2VillageCode("");
+            }
             mAnswer.setText(PropertiesUtils.getAddress2VillageCode());
         }
 
 // CFC Question 5
         if (fieldName.equalsIgnoreCase("name_other_entity")){
             PropertiesUtils.setInputView521a(mAnswer);
+            if (PropertiesUtils.getAnswer521Other()==1 && PropertiesUtils.getAnswer52()==1 ){
+                PropertiesUtils.getInputView521a().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView521a().setVisibility(INVISIBLE);
+            }
         }
 
         if (fieldName.equalsIgnoreCase("specify")){
             PropertiesUtils.setInputView541(mAnswer);
+            if (PropertiesUtils.getAnswer54()==1){
+                PropertiesUtils.getInputView541().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView541().setVisibility(INVISIBLE);
+            }
+
         }
 
 // CFC Question 6
 
         if (fieldName.equalsIgnoreCase("other_service")){
             PropertiesUtils.setInputView611(mAnswer);
+            if (PropertiesUtils.getAnswer611Other()==1){
+                PropertiesUtils.getInputView611().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView611().setVisibility(INVISIBLE);
+            }
+
         }
 //        if (fieldName.equalsIgnoreCase("foster_care")){
 //          PropertiesUtils.setInputView621(mAnswer);
 //        }
         if (fieldName.equalsIgnoreCase("total_foster_care")){
             PropertiesUtils.setInputView621a(mAnswer);
+            if (PropertiesUtils.getAnswer621()==1){
+                PropertiesUtils.getInputView621a().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView621a().setVisibility(INVISIBLE);
+            }
         }
         if (fieldName.equalsIgnoreCase("female_foster_care")){
             PropertiesUtils.setInputView621b(mAnswer);
+            if (PropertiesUtils.getAnswer621()==1){
+                PropertiesUtils.getInputView621b().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView621b().setVisibility(INVISIBLE);
+            }
         }
 //        if (fieldName.equalsIgnoreCase("kinship_care")){
 //            PropertiesUtils.setInputView622(mAnswer);
 //        }
         if (fieldName.equalsIgnoreCase("total_kinship_care")){
             PropertiesUtils.setInputView622a(mAnswer);
+            if (PropertiesUtils.getAnswer622()==1){
+                PropertiesUtils.getInputView622a().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView622a().setVisibility(INVISIBLE);
+            }
         }
         if (fieldName.equalsIgnoreCase("female_kinship_care")){
             PropertiesUtils.setInputView622b(mAnswer);
+            if (PropertiesUtils.getAnswer622()==1){
+                PropertiesUtils.getInputView622b().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView622b().setVisibility(INVISIBLE);
+            }
         }
 //        if (fieldName.equalsIgnoreCase("grouphome_care")){
 //            PropertiesUtils.setInputView623(mAnswer);
 //        }
         if (fieldName.equalsIgnoreCase("total_group_home")){
             PropertiesUtils.setInputView623a(mAnswer);
+            if (PropertiesUtils.getAnswer623()==1){
+                PropertiesUtils.getInputView623a().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView623a().setVisibility(INVISIBLE);
+            }
         }
         if (fieldName.equalsIgnoreCase("female_group_home")){
             PropertiesUtils.setInputView623b(mAnswer);
+            if (PropertiesUtils.getAnswer623()==1){
+                PropertiesUtils.getInputView623b().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView623b().setVisibility(INVISIBLE);
+            }
         }
 //        if (fieldName.equalsIgnoreCase("independent_care")){
 //            PropertiesUtils.setInputView624(mAnswer);
 //        }
         if (fieldName.equalsIgnoreCase("total_independent")){
             PropertiesUtils.setInputView624a(mAnswer);
+            if (PropertiesUtils.getAnswer624()==1){
+                PropertiesUtils.getInputView624a().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView624a().setVisibility(INVISIBLE);
+            }
         }
         if (fieldName.equalsIgnoreCase("female_independent")){
             PropertiesUtils.setInputView624b(mAnswer);
+            if (PropertiesUtils.getAnswer624()==1){
+                PropertiesUtils.getInputView624b().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView624b().setVisibility(INVISIBLE);
+            }
         }
 //        if (fieldName.equalsIgnoreCase("religious_care")){
 //            PropertiesUtils.setInputView625(mAnswer);
 //        }
         if (fieldName.equalsIgnoreCase("total_temple")){
             PropertiesUtils.setInputView625a(mAnswer);
+            if (PropertiesUtils.getAnswer625()==1){
+                PropertiesUtils.getInputView625a().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView625a().setVisibility(INVISIBLE);
+            }
         }
         if (fieldName.equalsIgnoreCase("female_temple")){
             PropertiesUtils.setInputView625b(mAnswer);
+            if (PropertiesUtils.getAnswer625()==1){
+                PropertiesUtils.getInputView625b().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView625b().setVisibility(INVISIBLE);
+            }
         }
 //        if (fieldName.equalsIgnoreCase("outside_service")){
 //            PropertiesUtils.setInputView626(mAnswer);
 //        }
         if (fieldName.equalsIgnoreCase("other_outside_service")){
             PropertiesUtils.setInputView6261(mAnswer);
+            if (PropertiesUtils.getAnswer626()==1){
+                PropertiesUtils.getInputView6261().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView6261().setVisibility(INVISIBLE);
+            }
         }
         if (fieldName.equalsIgnoreCase("total_religious")){
             PropertiesUtils.setInputView626a(mAnswer);
+            if (PropertiesUtils.getAnswer626()==1){
+                PropertiesUtils.getInputView626a().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView626a().setVisibility(INVISIBLE);
+            }
         }
         if (fieldName.equalsIgnoreCase("female_religious")){
             PropertiesUtils.setInputView626b(mAnswer);
+            if (PropertiesUtils.getAnswer626()==1){
+                PropertiesUtils.getInputView626b().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView626b().setVisibility(INVISIBLE);
+            }
         }
 
 // CFC Question 7
 
         if (fieldName.equalsIgnoreCase("amount_budget")){
             PropertiesUtils.setInputView741(mAnswer);
+            if (PropertiesUtils.getInputView74()!=null && PropertiesUtils.getInputView74().equalsIgnoreCase("yes")){
+                PropertiesUtils.getInputView741().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView741().setVisibility(INVISIBLE);
+            }
         }
 
         if (fieldName.equalsIgnoreCase("supporting_budget")){
             PropertiesUtils.setInputView742(mAnswer);
+            if (PropertiesUtils.getInputView74()!=null && PropertiesUtils.getInputView74().equalsIgnoreCase("yes")){
+                PropertiesUtils.getInputView742().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView742().setVisibility(INVISIBLE);
+            }
         }
 
         if (fieldName.equalsIgnoreCase("closure_when")){
             PropertiesUtils.setInputView751a(mAnswer);
+            if (PropertiesUtils.getInputView75()!=null && PropertiesUtils.getInputView75().equalsIgnoreCase("closure")){
+                PropertiesUtils.getInputView751a().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView751a().setVisibility(INVISIBLE);
+            }
         }
 
         if (fieldName.equalsIgnoreCase("closure_why")){
             PropertiesUtils.setInputView751b(mAnswer);
+            if (PropertiesUtils.getInputView75()!=null && PropertiesUtils.getInputView75().equalsIgnoreCase("closure")){
+                PropertiesUtils.getInputView751b().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView751b().setVisibility(INVISIBLE);
+            }
         }
         if (fieldName.equalsIgnoreCase("transit_when")){
             PropertiesUtils.setInputView752a(mAnswer);
+            if (PropertiesUtils.getInputView75()!=null && PropertiesUtils.getInputView75().equalsIgnoreCase("transition")){
+                PropertiesUtils.getInputView752a().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView752a().setVisibility(INVISIBLE);
+            }
         }
 
         if (fieldName.equalsIgnoreCase("transit_why")){
             PropertiesUtils.setInputView752b(mAnswer);
+            if (PropertiesUtils.getInputView75()!=null && PropertiesUtils.getInputView75().equalsIgnoreCase("transition")){
+                PropertiesUtils.getInputView752b().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView752b().setVisibility(INVISIBLE);
+            }
         }
 
         if (fieldName.equalsIgnoreCase("support_amount")){
             PropertiesUtils.setInputView753a(mAnswer);
+            if (PropertiesUtils.getInputView75()!=null && PropertiesUtils.getInputView75().equalsIgnoreCase("support_reintegration")){
+                PropertiesUtils.getInputView753a().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView753a().setVisibility(INVISIBLE);
+            }
         }
 
         if (fieldName.equalsIgnoreCase("support_when")){
             PropertiesUtils.setInputView753b(mAnswer);
+            if (PropertiesUtils.getInputView75()!=null && PropertiesUtils.getInputView75().equalsIgnoreCase("support_reintegration")){
+                PropertiesUtils.getInputView753b().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView753b().setVisibility(INVISIBLE);
+            }
         }
         if (fieldName.equalsIgnoreCase("support_why")){
             PropertiesUtils.setInputView753c(mAnswer);
+            if (PropertiesUtils.getInputView75()!=null && PropertiesUtils.getInputView75().equalsIgnoreCase("support_reintegration")){
+                PropertiesUtils.getInputView753c().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView753c().setVisibility(INVISIBLE);
+            }
         }
 
 
@@ -344,6 +498,18 @@ public class StringWidget extends QuestionWidget {
                             }
                     }
                     addView(mAnswer);
+
+            }
+
+        }
+        if (fieldName.equalsIgnoreCase("name_other_entity")){
+            if (PropertiesUtils.getAnswer521Other()==1 && PropertiesUtils.getAnswer52()==1 && PropertiesUtils.getInputView36().equalsIgnoreCase("local")){
+                PropertiesUtils.getInputView521a().setVisibility(VISIBLE);
+                PropertiesUtils.getQuestion521a().setVisibility(VISIBLE);
+            }
+            else if (PropertiesUtils.getAnswer521Other()==1 && PropertiesUtils.getAnswer52()==1 && PropertiesUtils.getInputView36().equalsIgnoreCase("international")){
+                PropertiesUtils.getInputView521a().setVisibility(VISIBLE);
+                PropertiesUtils.getQuestion521a().setVisibility(VISIBLE);
             }
         }
 
@@ -381,30 +547,22 @@ public class StringWidget extends QuestionWidget {
 //        }
 
 
-        if (fieldName.equalsIgnoreCase("name_other_entity")){
-            if (PropertiesUtils.getAnswer521Other()==1 && PropertiesUtils.getInputView36().equalsIgnoreCase("local")){
-                PropertiesUtils.getInputView521a().setVisibility(VISIBLE);
-                PropertiesUtils.getQuestion521a().setVisibility(VISIBLE);
-            }
-            else if (PropertiesUtils.getAnswer521Other()==1 && PropertiesUtils.getInputView36().equalsIgnoreCase("international")){
-                PropertiesUtils.getInputView521a().setVisibility(VISIBLE);
-                PropertiesUtils.getQuestion521a().setVisibility(VISIBLE);
-            }
-        }
+
 
         if (fieldName.equalsIgnoreCase("specify")){
-            if (PropertiesUtils.getAnswer54()==1 && PropertiesUtils.getInputView36().equalsIgnoreCase("local")){
-                if (PropertiesUtils.getInputView541()!=null)
+            if (PropertiesUtils.getAnswer54()==1 && PropertiesUtils.getInputView36().equalsIgnoreCase("local")) {
+                if (PropertiesUtils.getQuestion541() != null && PropertiesUtils.getInputView541() != null) {
                     PropertiesUtils.getInputView541().setVisibility(VISIBLE);
-                if (PropertiesUtils.getQuestion541()!=null)
                     PropertiesUtils.getQuestion541().setVisibility(VISIBLE);
+                }
             }
             else if (PropertiesUtils.getAnswer54()==1 && PropertiesUtils.getInputView36().equalsIgnoreCase("international")){
-                if (PropertiesUtils.getInputView541()!=null)
+                    if (PropertiesUtils.getQuestion541()!=null && PropertiesUtils.getInputView541()!=null) {
                     PropertiesUtils.getInputView541().setVisibility(VISIBLE);
-                if (PropertiesUtils.getQuestion541()!=null)
                     PropertiesUtils.getQuestion541().setVisibility(VISIBLE);
             }
+            }
+
         }
 
 

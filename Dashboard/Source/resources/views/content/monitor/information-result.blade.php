@@ -37,7 +37,7 @@
                 <!-- widget content -->
                 <div class="widget-body no-padding">
 
-                    <table id="datatable_fixed_column" class="table table-striped table-bordered" width="100%">
+                    <table id="datatable_fixed_column" class="table table-striped table-bordered printBorder" width="100%">
                         <thead>
                             <tr class="danger txt-color-darken">
                                 @foreach($col_headers as $header)
@@ -83,5 +83,15 @@
     }
     tr:hover{
         color: #0066cc;
+    }
+
+    @media print {
+        table,table th, table tr, table td {
+            border-top: #000 solid 1px;
+            border-bottom: #000 solid 1px;
+            border-left: #000 solid 1px;
+            border-right: #000 solid 1px;
+            border-collapse: collapse;
+        }
     }
 </style>

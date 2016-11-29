@@ -31,5 +31,9 @@ return [
         'information-result' => ' លទ្ធផលនៃព័ត៌មាន'
     ],
 
-    'variance' => 'គំលាត'
+    'variance' => 'គំលាត',
+
+    'report-title' => 'របាយការណ៍វាយតម្លៃសាលាកុមារមេត្រី',
+
+    'report-compare-title' => 'របាយការណ៍លទ្ធផលវាយតម្លៃសាលាកុមារមេត្រី'
 ];

@@ -1,11 +1,13 @@
 <!-- InformationController@compareEDF -->
 <section id="widget-grid" class="">
+    <button class="btn btn-primary" onclick="print()">{{ trans('button.print') }}</button></p>
+
     <?php
         $i = 0;
         $edf = [];
     ?>
 
-    <div class="col-md-12" style="padding: 0;">
+    <div id="mainEntityCompared" class="col-md-12" style="padding: 0;">
         @if(count($rows) < 2)
             @foreach($rows as $row)
                 <?php $edf[$i] = []; ?>
@@ -48,7 +50,7 @@
         @else
             @foreach($rows as $row)
                 <?php $edf[$i] = []; ?>
-                <div class="col-sm-5 school-compare">
+                <div id="entityCompared" class="col-sm-5 school-compare">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             @if (session()->get('locale'))
@@ -66,7 +68,7 @@
                                 <div class="col-sm-6">
                                     @foreach($colHeaders as $header)
                                         <div class="form-group">
-                                            <label for="field"
+                                            <label id="header-label" for="field"
                                                    style="font-weight: bold; font-size: 12px">{{$header->EntityDefinedFieldListName}}</label>
                                         </div>
                                     @endforeach
@@ -87,7 +89,7 @@
             @endforeach
 
             @if(count($edf) > 1)
-                <div class="col-sm-1 variance">
+                <div id="varianceCol" class="col-sm-1 variance">
                     <div class="panel panel-primary">
                         <div class="panel-heading" style="padding: 10px 0; text-align: center;">
                             {{ trans('information_content.variance') }}
@@ -104,20 +106,20 @@
                                             $k2 = 0.15;
                                             $k3 = 0.25;
                                             if ($variance < 1 - $k3) {
-                                                $display = "<i class='fa fa-arrow-down'></i><i class='fa fa-arrow-down'></i><i class='fa fa-arrow-down'></i>";
+                                                $display = "<i id='pointer' class='fa fa-arrow-down'></i><i class='fa fa-arrow-down'></i><i class='fa fa-arrow-down'></i>";
                                             } else if ($variance < 1 - $k2) {
-                                                $display = "<i class='fa fa-arrow-down'></i><i class='fa fa-arrow-down'></i>";
+                                                $display = "<i id='pointer' class='fa fa-arrow-down'></i><i class='fa fa-arrow-down'></i>";
                                             } else if ($variance < 1 - $k1) {
-                                                $display = "<i class='fa fa-arrow-down'></i>";
+                                                $display = "<i id='pointer' class='fa fa-arrow-down'></i>";
                                             } else if ($variance > 1 + $k3) {
-                                                $display = "<i class='fa fa-arrow-up'></i><i class='fa fa-arrow-up'></i><i class='fa fa-arrow-up'></i>";
+                                                $display = "<i id='pointer' class='fa fa-arrow-up'></i><i class='fa fa-arrow-up'></i><i class='fa fa-arrow-up'></i>";
                                             } else if ($variance > 1 + $k2) {
-                                                $display = "<i class='fa fa-arrow-up'></i><i class='fa fa-arrow-up'></i>";
+                                                $display = "<i id='pointer' class='fa fa-arrow-up'></i><i class='fa fa-arrow-up'></i>";
                                             } else if ($variance > 1 + $k1) {
-                                                $display = "<i class='fa fa-arrow-up'></i>";
+                                                $display = "<i id='pointer' class='fa fa-arrow-up'></i>";
                                             }
                                         }
-                                        echo "<div class='form-group'><label for='var'>$display</label></div>";
+                                        echo "<div class='form-group'><label for='field'>$display</label></div>";
                                     }
                                     ?>
                                 </div>
@@ -128,5 +130,73 @@
             @endif
         @endif
     </div>
-
 </section>
+
+<script type="text/javascript">
+    function addCss(myForm, fileName) {
+        var link = document.createElement('link');
+
+        link.type = 'text/css';
+        link.rel = 'stylesheet';
+        link.href = fileName;
+
+        myForm.document.head.appendChild(link);
+    }
+
+    function print() {
+        var printForm = window.open('', '_blank');
+
+        // var font_awesome_css = document.createElement('font_awesome_css');
+        // font_awesome_css = 'text/css';
+        // font_awesome_css.rel = 'stylesheet';
+        // font_awesome_css.href = '<?php echo asset("css/font-awesome.min.css") ?>';
+        //
+        // var bootstrap_css = document.createElement('bootstrap_css');
+        // bootstrap_css = 'text/css';
+        // bootstrap_css.rel = 'stylesheet';
+        // bootstrap_css.href = '<?php echo asset("css/bootstrap.min.css") ?>';
+        //
+        // printForm.document.head.appendChild(font_awesome_css);
+        // printForm.document.head.appendChild(bootstrap_css);
+
+        var css = '#header-label { font-size:13px !important;} #entityCompared { width:490px; } #pointer { padding-bottom:5px }',
+        style = document.createElement('style');
+
+        style.type = 'text/css';
+        if (style.styleSheet){
+          style.styleSheet.cssText = css;
+        } else {
+          style.appendChild(document.createTextNode(css));
+        }
+
+        printForm.document.head.appendChild(style);
+
+        addCss(printForm, '<?php echo asset("css/font-awesome.min.css") ?>');
+
+        addCss(printForm, '<?php echo asset("css/bootstrap.min.css") ?>');
+
+        addCss(printForm, '<?php echo asset("css/custom_style.css") ?>');
+
+        var schoolHTML = document.getElementById("mainEntityCompared").innerHTML;
+
+        // if (!varianceHTML) {
+        //     var varianceHTML = document.getElementById("varianceCol").innerHTML;
+        // }
+
+        var $title = '<h3 style="text-align:center;font-size:25px;margin-bottom:25px">{{ trans('information_content.report-compare-title') }}</h3>\n';
+        $title += schoolHTML;
+        printForm.document.body.innerHTML = $title;
+
+        setTimeout(function () {
+            // Automatic Open Print Diaglog
+            printForm.print();
+
+            // Close Windows after print completed
+            // printForm.close();
+        }, 300);
+
+
+        // printForm.close();
+    }
+</script>
+

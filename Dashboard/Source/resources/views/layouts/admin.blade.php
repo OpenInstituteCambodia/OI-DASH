@@ -60,6 +60,7 @@
     <link rel="apple-touch-startup-image" href="{{asset('img/splash/iphone.png')}}"
           media="screen and (max-device-width: 320px)">
     <link rel="stylesheet" href="{{ URL::asset('css/custom_style.css') }}">
+    
     <style media="screen">
         #ToolTables_datatable_fixed_column_2 {
             display: none;
@@ -541,3 +542,4 @@ Use search to find needed section.
 </body>
 
 </html>
+

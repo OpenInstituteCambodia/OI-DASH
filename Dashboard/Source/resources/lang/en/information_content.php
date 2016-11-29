@@ -30,6 +30,10 @@ return [
        'information-result' => ' Information Result'
     ],
 
-    'variance' => 'Variance'
+    'variance' => 'Variance',
+    
+    'report-title' => 'Report on CFS Monitoring',
+
+    'report-compare-title' => 'Report on Result of CFS Monitoring'
 
 ];

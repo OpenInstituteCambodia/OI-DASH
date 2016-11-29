@@ -11,5 +11,6 @@ return [
     'yes' => 'Yes',
     'no' => 'No',
 
-    'sign-in' => 'Sign In'
+    'sign-in' => 'Sign In',
+    'print' => 'Print'
 ];

@@ -134,6 +134,30 @@ public class SelectMultiWidget extends QuestionWidget {
                         c.setEnabled(!prompt.isReadOnly());
                         c.setPadding(10, 10, 10, 10);
                         ((CheckBox) c).setLineSpacing(1, 1.15f);
+
+                        if (fieldName.equalsIgnoreCase("license_other_entities")){
+                            if (mItems.get(2).getValue().equalsIgnoreCase("other")) {
+                                PropertiesUtils.setAnswer521Other(1);
+                            }  else{
+                                PropertiesUtils.setAnswer521Other(0);
+                            }
+                        }
+                        if (fieldName.equalsIgnoreCase("services")){
+                            if (mItems.get(2).getValue().equalsIgnoreCase("other")) {
+                                PropertiesUtils.setAnswer611Other(1);
+//                                if (PropertiesUtils.getInputView611()!=null){
+//                                    PropertiesUtils.getInputView611().setVisibility(VISIBLE);
+//                                    PropertiesUtils.getQuestion611().setVisibility(VISIBLE);
+//                                }
+
+                            }  else{
+                                PropertiesUtils.setAnswer611Other(0);
+//                                if (PropertiesUtils.getInputView611()!=null){
+//                                    PropertiesUtils.getInputView611().setVisibility(INVISIBLE);
+//                                    PropertiesUtils.getQuestion611().setVisibility(INVISIBLE);
+//                                }
+                            }
+                        }
                         mCheckboxes.add((CheckBox) c);
 
                     }
@@ -235,6 +259,7 @@ public class SelectMultiWidget extends QuestionWidget {
                         isAddDivider = true;
                     }
 
+
                     // add the dividing line between elements (except for the last element) but not last
                     ImageView divider = new ImageView(getContext());
                     divider.setBackgroundResource(android.R.drawable.divider_horizontal_bright);
@@ -245,44 +270,117 @@ public class SelectMultiWidget extends QuestionWidget {
 
                     // }
                     // buttonLayout.addView(mediaLayout);
+
+
                 }
             }
+
+
         }
 
         if (fieldName.equalsIgnoreCase("license_other_entities")){
             PropertiesUtils.setInputView521(this);
+            if (PropertiesUtils.getAnswer52()==1){
+                PropertiesUtils.getInputView521().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView521().setVisibility(INVISIBLE);
+            }
+        }
+
+        if (fieldName.equalsIgnoreCase("services")){
+            PropertiesUtils.setInputView61(this);
+            if (PropertiesUtils.getInputView611()!=null){
+                PropertiesUtils.getInputView611().setVisibility(VISIBLE);
+                PropertiesUtils.getQuestion611().setVisibility(VISIBLE);
+            }
         }
 
         if (fieldName.equalsIgnoreCase("c1_abuse")){
             PropertiesUtils.setInputView2321a1(this);
+            String test = PropertiesUtils.getInputView2321s1();
+            if (PropertiesUtils.getInputView2321s1()!=null){
+                if (PropertiesUtils.getInputView2321s1().equalsIgnoreCase("4") || PropertiesUtils.getInputView2321s1().equalsIgnoreCase("0.00001")){
+                    PropertiesUtils.getInputView2321a1().setVisibility(VISIBLE);
+                }
+            } else{
+                PropertiesUtils.getInputView2321a1().setVisibility(INVISIBLE);
+            }
         }
         if (fieldName.equalsIgnoreCase("c2_abuse")){
             PropertiesUtils.setInputView2321a2(this);
+           // String test = PropertiesUtils.getInputView2321s2();
+            if (PropertiesUtils.getInputView2321s2()!=null && PropertiesUtils.getInputView2321s2().equalsIgnoreCase("4")){
+                PropertiesUtils.getInputView2321a2().setVisibility(VISIBLE);
+            } if (PropertiesUtils.getInputView2321s2()!=null && PropertiesUtils.getInputView2321s2().equalsIgnoreCase("0.00001")){
+                PropertiesUtils.getInputView2321a2().setVisibility(VISIBLE);
+            }else{
+                PropertiesUtils.getInputView2321a2().setVisibility(INVISIBLE);
+            }
         }
         if (fieldName.equalsIgnoreCase("c3_abuse")){
             PropertiesUtils.setInputView2321a3(this);
+            if (PropertiesUtils.getInputView2321s3()!=null && (PropertiesUtils.getInputView2321s3().equalsIgnoreCase("4") || PropertiesUtils.getInputView2321s3().equalsIgnoreCase("0.00001") )){
+                PropertiesUtils.getInputView2321a3().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView2321a3().setVisibility(INVISIBLE);
+            }
         }
         if (fieldName.equalsIgnoreCase("c4_abuse")){
             PropertiesUtils.setInputView2321a4(this);
+            if (PropertiesUtils.getInputView2321s4()!=null && (PropertiesUtils.getInputView2321s4().equalsIgnoreCase("4") || PropertiesUtils.getInputView2321s4().equalsIgnoreCase("0.00001") )){
+                PropertiesUtils.getInputView2321a4().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView2321a4().setVisibility(INVISIBLE);
+            }
         }
         if (fieldName.equalsIgnoreCase("c5_abuse")){
             PropertiesUtils.setInputView2321a5(this);
+            if (PropertiesUtils.getInputView2321s5()!=null && (PropertiesUtils.getInputView2321s5().equalsIgnoreCase("4") || PropertiesUtils.getInputView2321s5().equalsIgnoreCase("0.00001")) ){
+                PropertiesUtils.getInputView2321a5().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView2321a5().setVisibility(INVISIBLE);
+            }
         }
 
         if (fieldName.equalsIgnoreCase("c1_image_abuse")){
             PropertiesUtils.setInputView2322a1(this);
+            if (PropertiesUtils.getInputView2322i1()!=null &&  PropertiesUtils.getInputView2322i1().equalsIgnoreCase("yes")){
+                PropertiesUtils.getInputView2322a1().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView2322a1().setVisibility(INVISIBLE);
+            }
         }
         if (fieldName.equalsIgnoreCase("c2_image_abuse")){
             PropertiesUtils.setInputView2322a2(this);
+            if (PropertiesUtils.getInputView2322i2()!=null &&  PropertiesUtils.getInputView2322i2().equalsIgnoreCase("yes")){
+                PropertiesUtils.getInputView2322a2().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView2322a2().setVisibility(INVISIBLE);
+            }
         }
         if (fieldName.equalsIgnoreCase("c3_image_abuse")){
             PropertiesUtils.setInputView2322a3(this);
+            if (PropertiesUtils.getInputView2322i3()!=null &&  PropertiesUtils.getInputView2322i3().equalsIgnoreCase("yes")){
+                PropertiesUtils.getInputView2322a3().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView2322a3().setVisibility(INVISIBLE);
+            }
         }
         if (fieldName.equalsIgnoreCase("c4_image_abuse")){
             PropertiesUtils.setInputView2322a4(this);
+            if (PropertiesUtils.getInputView2322i4()!=null &&  PropertiesUtils.getInputView2322i4().equalsIgnoreCase("yes")){
+                PropertiesUtils.getInputView2322a4().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView2322a4().setVisibility(INVISIBLE);
+            }
         }
         if (fieldName.equalsIgnoreCase("c5_image_abuse")){
             PropertiesUtils.setInputView2322a5(this);
+            if (PropertiesUtils.getInputView2322i5()!=null &&  PropertiesUtils.getInputView2322i5().equalsIgnoreCase("yes")){
+                PropertiesUtils.getInputView2322a5().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView2322a5().setVisibility(INVISIBLE);
+            }
         }
 
         if (appearance.equalsIgnoreCase("hide")) {
@@ -291,6 +389,7 @@ public class SelectMultiWidget extends QuestionWidget {
         } else{
             addView(buttonLayout, params);
         }
+
 
         if (fieldName.equalsIgnoreCase("activities_list")) {
             for (int j = 0; j < mCheckboxes.size(); j++) {
@@ -334,6 +433,9 @@ public class SelectMultiWidget extends QuestionWidget {
 
                         if (fieldName.equalsIgnoreCase("services")){
                             if (mCheckboxes.get(2).isChecked()){
+                                if (PropertiesUtils.getInputView611()!=null){
+                                    PropertiesUtils.getInputView611().setVisibility(VISIBLE);
+                                }
                                 PropertiesUtils.setAnswer611Other(1);
                             }
                             if (!mCheckboxes.get(2).isChecked()){
@@ -360,10 +462,9 @@ public class SelectMultiWidget extends QuestionWidget {
                         else if (!mCheckboxes.get(2).isChecked()){
                             PropertiesUtils.getInputView521a().setVisibility(GONE);
                             PropertiesUtils.getQuestion521a().setVisibility(GONE);
+                            PropertiesUtils.getInputView521a().setText("");
                             PropertiesUtils.setAnswer521Other(0);
-
                         }
-
                     }
                 });
             }
@@ -376,13 +477,18 @@ public class SelectMultiWidget extends QuestionWidget {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (mCheckboxes.get(2).isChecked()) {
-                            PropertiesUtils.getInputView611().setVisibility(VISIBLE);
-                            PropertiesUtils.getQuestion611().setVisibility(VISIBLE);
+//                            if(PropertiesUtils.getInputView611()!=null){
+                                PropertiesUtils.getInputView611().setVisibility(VISIBLE);
+                                PropertiesUtils.getQuestion611().setVisibility(VISIBLE);
+//                            }
                             PropertiesUtils.setAnswer611Other(1);
                         }
                         else if (!mCheckboxes.get(2).isChecked()){
-                            PropertiesUtils.getInputView611().setVisibility(GONE);
-                            PropertiesUtils.getQuestion611().setVisibility(GONE);
+//                            if(PropertiesUtils.getInputView611()!=null){
+                                PropertiesUtils.getInputView611().setVisibility(GONE);
+                                PropertiesUtils.getQuestion611().setVisibility(GONE);
+                                PropertiesUtils.getInputView611().setText("");
+//                            }
                             PropertiesUtils.setAnswer611Other(0);
                         }
 
@@ -392,38 +498,30 @@ public class SelectMultiWidget extends QuestionWidget {
         }
 
 
+
+
         if (PropertiesUtils.getAnswer52()==1 && PropertiesUtils.getInputView36().equalsIgnoreCase("local")){
-            if (PropertiesUtils.getInputView521()!=null){
+            if (PropertiesUtils.getInputView521()!=null && PropertiesUtils.getQuestion521()!=null){
                 PropertiesUtils.getInputView521().setVisibility(VISIBLE);
-            }
-            if (PropertiesUtils.getQuestion521()!=null){
                 PropertiesUtils.getQuestion521().setVisibility(VISIBLE);
             }
         }else if (PropertiesUtils.getAnswer52()==1 && PropertiesUtils.getInputView36().equalsIgnoreCase("international")) {
-            if (PropertiesUtils.getInputView521() != null) {
+            if (PropertiesUtils.getInputView521()!=null && PropertiesUtils.getQuestion521()!=null){
                 PropertiesUtils.getInputView521().setVisibility(VISIBLE);
-            }
-            if (PropertiesUtils.getQuestion521() != null) {
                 PropertiesUtils.getQuestion521().setVisibility(VISIBLE);
             }
         }
-
 
         /// student1
 
         if (PropertiesUtils.getInputView2321s1()!=null && PropertiesUtils.getInputView2321s1().equalsIgnoreCase("4")){
-            if (PropertiesUtils.getInputView2321a1()!=null){
+            if (PropertiesUtils.getInputView2321a1()!=null && PropertiesUtils.getQuestion2321a1()!=null){
                 PropertiesUtils.getInputView2321a1().setVisibility(VISIBLE);
-            }
-            if (PropertiesUtils.getQuestion2321a1()!=null){
                 PropertiesUtils.getQuestion2321a1().setVisibility(VISIBLE);
             }
-        }
-        if (PropertiesUtils.getInputView2321s1()!=null && PropertiesUtils.getInputView2321s1().equalsIgnoreCase("0.00001")){
-            if (PropertiesUtils.getInputView2321a1()!=null){
+        }else if (PropertiesUtils.getInputView2321s1()!=null && PropertiesUtils.getInputView2321s1().equalsIgnoreCase("0.00001")){
+            if (PropertiesUtils.getInputView2321a1()!=null && PropertiesUtils.getQuestion2321a1()!=null){
                 PropertiesUtils.getInputView2321a1().setVisibility(VISIBLE);
-            }
-            if (PropertiesUtils.getQuestion2321a1()!=null){
                 PropertiesUtils.getQuestion2321a1().setVisibility(VISIBLE);
             }
         }
@@ -431,18 +529,14 @@ public class SelectMultiWidget extends QuestionWidget {
         /// student2
 
         if (PropertiesUtils.getInputView2321s2()!=null && PropertiesUtils.getInputView2321s2().equalsIgnoreCase("4")){
-            if (PropertiesUtils.getInputView2321a2()!=null){
+            if (PropertiesUtils.getInputView2321a2()!=null && PropertiesUtils.getQuestion2321a2()!=null){
                 PropertiesUtils.getInputView2321a2().setVisibility(VISIBLE);
-            }
-            if (PropertiesUtils.getQuestion2321a2()!=null){
                 PropertiesUtils.getQuestion2321a2().setVisibility(VISIBLE);
             }
         }
-        if (PropertiesUtils.getInputView2321s2()!=null && PropertiesUtils.getInputView2321s2().equalsIgnoreCase("0.00001")){
+        else if (PropertiesUtils.getInputView2321s2()!=null && PropertiesUtils.getInputView2321s2().equalsIgnoreCase("0.00001")){
             if (PropertiesUtils.getInputView2321a2()!=null){
                 PropertiesUtils.getInputView2321a2().setVisibility(VISIBLE);
-            }
-            if (PropertiesUtils.getQuestion2321a2()!=null){
                 PropertiesUtils.getQuestion2321a2().setVisibility(VISIBLE);
             }
         }
@@ -450,18 +544,14 @@ public class SelectMultiWidget extends QuestionWidget {
         /// student3
 
         if (PropertiesUtils.getInputView2321s3()!=null && PropertiesUtils.getInputView2321s3().equalsIgnoreCase("4")){
-            if (PropertiesUtils.getInputView2321a3()!=null){
+            if (PropertiesUtils.getInputView2321a3()!=null && PropertiesUtils.getQuestion2321a3()!=null){
                 PropertiesUtils.getInputView2321a3().setVisibility(VISIBLE);
-            }
-            if (PropertiesUtils.getQuestion2321a3()!=null){
                 PropertiesUtils.getQuestion2321a3().setVisibility(VISIBLE);
             }
         }
-        if (PropertiesUtils.getInputView2321s3()!=null && PropertiesUtils.getInputView2321s3().equalsIgnoreCase("0.00001")){
-            if (PropertiesUtils.getInputView2321a3()!=null){
+        else if (PropertiesUtils.getInputView2321s3()!=null && PropertiesUtils.getInputView2321s3().equalsIgnoreCase("0.00001")){
+            if (PropertiesUtils.getInputView2321a3()!=null && PropertiesUtils.getQuestion2321a3()!=null){
                 PropertiesUtils.getInputView2321a3().setVisibility(VISIBLE);
-            }
-            if (PropertiesUtils.getQuestion2321a3()!=null){
                 PropertiesUtils.getQuestion2321a3().setVisibility(VISIBLE);
             }
         }
@@ -469,18 +559,14 @@ public class SelectMultiWidget extends QuestionWidget {
         /// student4
 
         if (PropertiesUtils.getInputView2321s4()!=null && PropertiesUtils.getInputView2321s4().equalsIgnoreCase("4")){
-            if (PropertiesUtils.getInputView2321a4()!=null){
+            if (PropertiesUtils.getInputView2321a4()!=null && PropertiesUtils.getQuestion2321a4()!=null){
                 PropertiesUtils.getInputView2321a4().setVisibility(VISIBLE);
-            }
-            if (PropertiesUtils.getQuestion2321a4()!=null){
                 PropertiesUtils.getQuestion2321a4().setVisibility(VISIBLE);
             }
         }
         if (PropertiesUtils.getInputView2321s4()!=null && PropertiesUtils.getInputView2321s4().equalsIgnoreCase("0.00001")){
-            if (PropertiesUtils.getInputView2321a4()!=null){
+            if (PropertiesUtils.getInputView2321a4()!=null && PropertiesUtils.getQuestion2321a4()!=null){
                 PropertiesUtils.getInputView2321a4().setVisibility(VISIBLE);
-            }
-            if (PropertiesUtils.getQuestion2321a4()!=null){
                 PropertiesUtils.getQuestion2321a4().setVisibility(VISIBLE);
             }
         }
@@ -488,18 +574,14 @@ public class SelectMultiWidget extends QuestionWidget {
         /// student5
 
         if (PropertiesUtils.getInputView2321s5()!=null && PropertiesUtils.getInputView2321s5().equalsIgnoreCase("4")){
-            if (PropertiesUtils.getInputView2321a5()!=null){
+            if (PropertiesUtils.getInputView2321a5()!=null && PropertiesUtils.getQuestion2321a5()!=null){
                 PropertiesUtils.getInputView2321a5().setVisibility(VISIBLE);
-            }
-            if (PropertiesUtils.getQuestion2321a5()!=null){
                 PropertiesUtils.getQuestion2321a5().setVisibility(VISIBLE);
             }
         }
-        if (PropertiesUtils.getInputView2321s5()!=null && PropertiesUtils.getInputView2321s5().equalsIgnoreCase("0.00001")){
-            if (PropertiesUtils.getInputView2321a5()!=null){
+        else if (PropertiesUtils.getInputView2321s5()!=null && PropertiesUtils.getInputView2321s5().equalsIgnoreCase("0.00001")){
+            if (PropertiesUtils.getInputView2321a5()!=null && PropertiesUtils.getQuestion2321a5()!=null){
                 PropertiesUtils.getInputView2321a5().setVisibility(VISIBLE);
-            }
-            if (PropertiesUtils.getQuestion2321a5()!=null){
                 PropertiesUtils.getQuestion2321a5().setVisibility(VISIBLE);
             }
         }

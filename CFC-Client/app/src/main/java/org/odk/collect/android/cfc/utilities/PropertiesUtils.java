@@ -256,9 +256,11 @@ public class PropertiesUtils {
     private static String inputView36;
     private static String inputView51;
 
-    private static int answer52;
-    private static int answer53;
-    private static int answer54;
+
+
+    private static int answer52 = 0;
+    private static int answer53 = 0;
+    private static int answer54 = 0;
 
     private static TextView question52;
     private static LinearLayout inputView52;
@@ -466,6 +468,9 @@ public class PropertiesUtils {
 
 
     //CSF Question Part 6
+    private static TextView question61;
+    private static LinearLayout inputView61;
+
     private static TextView question611;
     private static EditText inputView611;
 
@@ -527,13 +532,29 @@ public class PropertiesUtils {
     private static EditText inputView626b;
 
     private static String inputView62;
-    private static int answer621;
-    private static int answer622;
-    private static int answer623;
-    private static int answer624;
-    private static int answer625;
-    private static int answer626;
+    private static int answer621=0;
+    private static int answer622=0;
+    private static int answer623=0;
+    private static int answer624=0;
+    private static int answer625=0;
+    private static int answer626=0;
     private static int answer611Other;
+
+    public static TextView getQuestion61() {
+        return question61;
+    }
+
+    public static void setQuestion61(TextView question61) {
+        PropertiesUtils.question61 = question61;
+    }
+
+    public static LinearLayout getInputView61() {
+        return inputView61;
+    }
+
+    public static void setInputView61(LinearLayout inputView61) {
+        PropertiesUtils.inputView61 = inputView61;
+    }
 
     public static int getAnswer611Other() {
         return answer611Other;

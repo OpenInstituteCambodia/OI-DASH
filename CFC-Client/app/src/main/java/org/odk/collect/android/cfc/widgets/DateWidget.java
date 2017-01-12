@@ -66,25 +66,23 @@ public class DateWidget extends QuestionWidget {
 
         if (fieldName.equalsIgnoreCase("license_issued_date")) {
             PropertiesUtils.setInputView511(mDatePicker);
-
-      /*      if (PropertiesUtils.getInputView511()!=null){
-                Calendar c = Calendar.getInstance();
-                mDatePicker.updateDate(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+            if (PropertiesUtils.getInputView51()!=null && PropertiesUtils.getInputView51().equalsIgnoreCase("yes")){
+                PropertiesUtils.getInputView511().setVisibility(VISIBLE);
             } else{
-                Calendar c = Calendar.getInstance();
-                mDatePicker.updateDate(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
-                PropertiesUtils.setInputView511();
+                PropertiesUtils.getInputView511().setVisibility(INVISIBLE);
             }
-*/
+//        /*      if (PropertiesUtils.getInputView511()!=null){
+//                Calendar c = Calendar.getInstance();
+//                mDatePicker.updateDate(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+//            } else{
+//                Calendar c = Calendar.getInstance();
+//                mDatePicker.updateDate(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+//                PropertiesUtils.setInputView511();
+//            }
+//        */
         }
 
-        if (fieldName.equalsIgnoreCase("starting_date")){
-            PropertiesUtils.setInputView531(mDatePicker);
-        }
 
-        if (fieldName.equalsIgnoreCase("to_date")){
-            PropertiesUtils.setInputView532(mDatePicker);
-        }
 
         hideDayFieldIfNotInFormat(prompt);
 
@@ -132,22 +130,50 @@ public class DateWidget extends QuestionWidget {
             addView(mDatePicker);
         }
 
+        if (fieldName.equalsIgnoreCase("starting_date")){
+            PropertiesUtils.setInputView531(mDatePicker);
+            if (PropertiesUtils.getAnswer53()==1){
+                PropertiesUtils.getInputView531().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView531().setVisibility(INVISIBLE);
+            }
+        }
+
+        if (fieldName.equalsIgnoreCase("to_date")){
+            PropertiesUtils.setInputView532(mDatePicker);
+            if (PropertiesUtils.getAnswer53()==1){
+                PropertiesUtils.getInputView532().setVisibility(VISIBLE);
+            } else{
+                PropertiesUtils.getInputView532().setVisibility(INVISIBLE);
+            }
+        }
+
         if (PropertiesUtils.getInputView51()!=null && PropertiesUtils.getInputView51().equalsIgnoreCase("yes")){
             PropertiesUtils.getInputView511().setVisibility(VISIBLE);
             PropertiesUtils.getQuestion511().setVisibility(VISIBLE);
         }
 
         if (PropertiesUtils.getAnswer53()==1 && PropertiesUtils.getInputView36().equalsIgnoreCase("local")){
-            PropertiesUtils.getInputView531().setVisibility(VISIBLE);
-            PropertiesUtils.getQuestion531().setVisibility(VISIBLE);
-            PropertiesUtils.getInputView532().setVisibility(VISIBLE);
-            PropertiesUtils.getQuestion532().setVisibility(VISIBLE);
+            if (PropertiesUtils.getInputView531()!=null && PropertiesUtils.getQuestion531()!=null){
+                PropertiesUtils.getInputView531().setVisibility(VISIBLE);
+                PropertiesUtils.getQuestion531().setVisibility(VISIBLE);
+            }
+            if (PropertiesUtils.getInputView532()!=null && PropertiesUtils.getQuestion532()!=null){
+                PropertiesUtils.getInputView532().setVisibility(VISIBLE);
+                PropertiesUtils.getQuestion532().setVisibility(VISIBLE);
+            }
         }
         else if (PropertiesUtils.getAnswer53()==1 && PropertiesUtils.getInputView36().equalsIgnoreCase("international")){
-            PropertiesUtils.getInputView531().setVisibility(VISIBLE);
-            PropertiesUtils.getQuestion531().setVisibility(VISIBLE);
-            PropertiesUtils.getInputView532().setVisibility(VISIBLE);
-            PropertiesUtils.getQuestion532().setVisibility(VISIBLE);
+            if (PropertiesUtils.getInputView531()!=null && PropertiesUtils.getQuestion531()!=null){
+                PropertiesUtils.getInputView531().setVisibility(VISIBLE);
+                PropertiesUtils.getQuestion531().setVisibility(VISIBLE);
+            }
+            if (PropertiesUtils.getInputView532()!=null && PropertiesUtils.getQuestion532()!=null){
+                PropertiesUtils.getInputView532().setVisibility(VISIBLE);
+                PropertiesUtils.getQuestion532().setVisibility(VISIBLE);
+            }
+
+
         }
 
         // If there's an answer, use it.
@@ -201,6 +227,9 @@ public class DateWidget extends QuestionWidget {
                 this.mDatePicker.setSpinnersShown(true);
             }
             mDatePicker.setVisibility(GONE);
+        } else if ("hide".equalsIgnoreCase(appearance)) {
+            mDatePicker.setVisibility(INVISIBLE);
+            this.setVisibility(INVISIBLE);
         }
         else {
             if (Build.VERSION.SDK_INT >= 11) {

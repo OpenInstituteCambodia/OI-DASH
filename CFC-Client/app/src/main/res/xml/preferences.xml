@@ -23,11 +23,13 @@
         <EditTextPreference
             android:id="@+id/username"
             android:dialogTitle="@string/change_username"
+            android:defaultValue="DC"
             android:inputType="textNoSuggestions"
             android:key="username"
             android:title="@string/username" />
         <EditTextPreference
             android:id="@+id/password"
+            android:defaultValue="123456dc"
             android:dialogTitle="@string/change_password"
             android:inputType="textNoSuggestions"
             android:key="password"

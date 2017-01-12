@@ -141,7 +141,6 @@ public class FormChooserList extends ListActivity implements DiskSyncListener {
         finish();
     }
 
-
     @Override
     protected void onResume() {
         mDiskSyncTask.setDiskSyncListener(this);

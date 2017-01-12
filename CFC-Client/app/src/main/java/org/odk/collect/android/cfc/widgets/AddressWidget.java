@@ -218,6 +218,11 @@ public class AddressWidget extends QuestionWidget implements AdapterView.OnItemS
         ItemData itemDataDistrict = (ItemData) spinnerDistrict.getSelectedItem();
         ItemData itemDataCommune = (ItemData) spinnerCommune.getSelectedItem();
         //Auto select neighboring District, commune, village
+        if (provincialData ==null || itemDataDistrict==null || itemDataCommune ==null || villageData ==null){
+            setFocus(getContext());
+            return null;
+        }
+
         if (provincialData.getName().equalsIgnoreCase("​ផ្សេងទៀត")) {
             spinnerDistrict.setSelection(1);
             spinnerCommune.setSelection(spinnerCommune.getCount() - 1);
